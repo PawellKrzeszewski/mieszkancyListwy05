@@ -1,41 +1,33 @@
 <!doctype html>
 <html lang="pl">
+
 <head>
   <meta charset="utf-8" />
   <title>Mapa tras rowerowych — prosty przykład</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"/>
-    <script src="https://kit.fontawesome.com/8164e1f9c8.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <script src="https://kit.fontawesome.com/8164e1f9c8.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <header>
-        <div>
-            <div id="logo">
-                <a href="./index.html"><img src="" alt="logo"></a>
-            </div>
-
-            <div><a href="./index.html">SUMP — Płock</a></div>
-        </div>
-
-        <nav>
-            <ul>
-                <li><a href="./GrupaRowerowa.html">CHATS</a></li>
-                <li><a href="./Kontakty.html">CONTACT</a></li>
-            </ul>
-        </nav>
-
-        <div id="settings">
-            <i class="fa-solid fa-gear"></i>
-        </div>
-
-    </header>
-
+  <header>
     <div>
-      <button id="toggleLeft" class="slide-btn left">☰ Lewy panel</button>
-      <button id="toggleRight" class="slide-btn right">☰ Prawy panel</button>
+      <div id="logo">
+        <a href="./index.html"><img src="" alt="logo"></a>
+      </div>
+      <div><a href="./index.html">nazwa apliakcji</a></div>
     </div>
-
+    <nav>
+      <ul>
+        <li><a href="#">CHATS</a></li>
+        <li><a href="#">CONTACT</a></li>
+      </ul>
+    </nav>
+    <div id="settings">
+      <i class="fa-solid fa-gear"></i>
+    </div>
+  </header>
   <main>
     <section>
       <div>
@@ -47,30 +39,158 @@
         </ul>
       </div>
       <div id="map"></div>
-
-      <div id="panel">
-          <div id="con">
-            <h2 id="h2">Filtry tras </h2>
-            <span id="colapse">—</span>
-          
-          </div>
-
-        <div id="clear">
-          
-          <label><input type="checkbox" id="filter-family"/> Trasy rodzinne</label>
-          <br>
-          <label><input type="checkbox" id="filter-sport"/> Trasy sportowe</label>
-
-          <hr/>
-          <br>
-
-          <label><input type="checkbox" id="show-pois" checked/> Pokaż miejsca odpoczynku</label>
-          <br>
-          <label><input type="checkbox" id="show-stations" checked/> Pokaż stacje roweru miejskiego</label>
-        </div>
-      </div>
     </section>
-<!-- 
+  </main>
+  <!-- <section> 
+<strong>Mapa tras rowerowych — Płock (prosty)</strong> 
+<div class="controls"> 
+<label>Wczytaj GPX: <input id="gpxfile" type="file" accept=".gpx" /></label> 
+<button id="toggleCyclo">Przełącz CyclOSM</button> 
+</div> 
+</section> -->
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <!-- togeojson: konwerter GPX -> GeoJSON -->
+  <script src="https://unpkg.com/@mapbox/togeojson@0.16.0/dist/togeojson.js"></script>
+  <script>
+    // 1) Utwórz mapę i ustaw widok na Płock 
+    const map = L.map('map').setView([52.546, 19.700], 12);
+
+    // 2) Dwie warstwy: zwykłe OSM i CyclOSM (mapa rowerowa) 
+    const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
+    const cyclo = L.tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png', { attribution: '&copy; CyclOSM & OpenStreetMap contributors' });
+
+    document.getElementById('toggleCyclo').onclick = () => {
+      if (map.hasLayer(cyclo)) { map.removeLayer(cyclo); osm.addTo(map); }
+      else { map.removeLayer(osm); cyclo.addTo(map); }
+    };
+    <div>
+      <a href="./index.html">SUMP — Płock</a>
+    </div> </div >
+
+      <nav>
+        <ul>
+          <li><a href="./GrupaRowerowa.html">CHATS</a></li>
+          <li><a href="./Kontakty.html">CONTACT</a></li>
+        </ul>
+      </nav>
+
+    // 3) Funkcja rysująca GeoJSON na mapie 
+    let gpxLayer = L.layerGroup().addTo(map);
+    function drawGeoJSON(geojson) {
+      // wyczyść poprzednie 
+      gpxLayer.clearLayers();
+      // jeżeli to trasa (LineString), narysuj polylinię i ustaw widok 
+      L.geoJSON(geojson, {
+        onEachFeature: function (feature, layer) {
+          // popup z nazwą jeśli jest 
+          if (feature.properties && feature.properties.name) { layer.bindPopup(feature.properties.name); }
+        },
+        style: function (feature) {
+          if (feature.geometry && feature.geometry.type === 'LineString') { return { color: '#ff3333', weight: 4 }; }
+          return {};
+        },
+        pointToLayer: function (feature, latlng) { return L.marker(latlng); }
+      }).addTo(gpxLayer);
+      // dopasuj zoom do danych 
+      try { map.fitBounds(gpxLayer.getBounds(), { padding: [20, 20] }); } catch (e) { /* brak bounds */ }
+    }
+
+    // 4) Obsługa wczytywania pliku GPX 
+    document.getElementById('gpxfile').addEventListener('change', function (evt) {
+      const f = evt.target.files[0];
+      if (!f) return;
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const gpxText = e.target.result;
+        // parsujemy GPX na DOM, a potem konwertujemy do GeoJSON (togeojson) 
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(gpxText, "application/xml");
+        const geojson = toGeoJSON.gpx(xml);
+        if (!geojson || !geojson.features || geojson.features.length === 0) {
+          alert('Plik GPX nie zawiera śladu.');
+          return;
+        }
+        drawGeoJSON(geojson);
+        // (opcjonalnie) tutaj możesz wysłać GPX na serwer via fetch('/api/gpx', {method:'POST', body: formData}) 
+      };
+      reader.readAsText(f);
+    });
+
+    // 5) Załaduj - opcjonalnie - plik pois.geojson jeśli chcesz dodać punkty odpoczynku 
+    // Jeśli w tym samym folderze umieszczasz pois.geojson, odkomentuj poniższy kod: 
+    fetch('pois.geojson').then(r => {
+      if (!r.ok) return;
+      return r.json();
+    }).then(data => {
+      if (!data) return;
+      L.geoJSON(data, {
+        pointToLayer: (feature, latlng) => L.marker(latlng),
+        onEachFeature: (feature, layer) => {
+          layer.bindPopup((feature.properties && feature.properties.name) || 'Miejsce odpoczynku');
+        }
+      }).addTo(map);
+    }).catch(() => {/* brak pois.geojson - ok */ }); 
+  </script>
+
+  <!-- Przyciski otwierające panele -->
+  <button id="toggleLeft" class="slide-btn left">Alerty ☰</button>
+  <button id="toggleRight" class="slide-btn right">☰ Wydarzenia</button>
+
+  <!-- Panele wysuwane -->
+  <div id="leftPanel" class="side-panel left">
+    <h2>Alerty tras rowerowych 🚨</h2>
+    <div id="obramowanie">
+      <div class="alert">
+        <h3>🚧 Zamknięcie ścieżki nad Wisłą</h3>
+        <p>Odcinek między Mostem Legionów a Zalewem Sobótka jest nieczynny do 22 października z powodu remontu wałów.
+        </p>
+      </div>
+
+      <div class="alert">
+        <h3>🌲 Powalone drzewa w lesie Brwilno</h3>
+        <p>Utrudniony przejazd szlakiem leśnym po ostatnich wichurach. Zalecany objazd przez leśniczówkę Dzierzązna.</p>
+      </div>
+      <div>
+        <button id="toggleLeft" class="slide-btn left">☰ Lewy panel</button>
+        <button id="toggleRight" class="slide-btn right">☰ Prawy panel</button>
+      </div>
+
+      <main>
+        <section>
+          <div>
+            <h1>ZNAJDŹ ŚCIEŻKI ROWEROWE!!!</h1>
+            <ul>
+              <li>Wyszukuj i odkrywaj najlepsze trasy rowerowe w Twojej okolicy!</li>
+              <li>Sprawdź, gdzie możesz wybrać się na rower – w mieście, lesie czy nad rzeką!</li>
+              <li>Przesuń mapę, powiększ i znajdź idealną trasę na dzisiejszą przejażdżkę</li>
+            </ul>
+          </div>
+          <div id="map"></div>
+
+          <div id="panel">
+            <div id="con">
+              <h2 id="h2">Filtry tras </h2>
+              <span id="colapse">—</span>
+
+            </div>
+
+            <div id="clear">
+
+              <label><input type="checkbox" id="filter-family" /> Trasy rodzinne</label>
+              <br>
+              <label><input type="checkbox" id="filter-sport" /> Trasy sportowe</label>
+
+              <hr />
+              <br>
+
+              <label><input type="checkbox" id="show-pois" checked /> Pokaż miejsca odpoczynku</label>
+              <br>
+              <label><input type="checkbox" id="show-stations" checked /> Pokaż stacje roweru miejskiego</label>
+            </div>
+          </div>
+        </section>
+        <!-- 
     <div id="container">
       <div id="panel" >
         <div>
@@ -87,8 +207,29 @@
       </div>
     </div> -->
 
-  </main>
+      </main>
 
+      <div class="alert">
+        <h3>💧 Podtopienia na trasie nad Wisłą</h3>
+        <p>Po intensywnych opadach ścieżka rowerowa przy ulicy Grabówka jest miejscami zalana.</p>
+      </div>
+
+      <div class="alert">
+        <h3>🦺 Prace drogowe w centrum miasta</h3>
+        <p>Od 18 do 25 października zamknięty przejazd ścieżką przy ul. Tysiąclecia z powodu remontu asfaltu.</p>
+      </div>
+
+      <div class="alert">
+        <h3>🔥 Ograniczony dostęp do rezerwatu Soczewka</h3>
+        <p>Wprowadzono zakaz wjazdu rowerów w część rezerwatu z powodu wysokiego ryzyka pożarowego.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="rightPanel" class="side-panel right">
+    <h2>Wydarzenia</h2>
+    <p></p>
+  </div>
 
 
   <!-- Leaflet + skrypt mapy -->
@@ -98,43 +239,43 @@
 
 
 
-<!-- Przyciski otwierające panele -->
+  <!-- Przyciski otwierające panele -->
 
 
-<!-- Panele wysuwane -->
-<div id="leftPanel" class="side-panel left">
-  <h2>Lewa zawartość</h2>
-  <p>Tu możesz dodać np. listę tras rowerowych lub ustawienia.</p>
-</div>
+  <!-- Panele wysuwane -->
+  <div id="leftPanel" class="side-panel left">
+    <h2>Lewa zawartość</h2>
+    <p>Tu możesz dodać np. listę tras rowerowych lub ustawienia.</p>
+  </div>
 
-<div id="rightPanel" class="side-panel right">
-  <h2>Prawa zawartość</h2>
-  <p>Tu możesz dodać np. punkty POI, statystyki itp.</p>
-</div>
+  <div id="rightPanel" class="side-panel right">
+    <h2>Prawa zawartość</h2>
+    <p>Tu możesz dodać np. punkty POI, statystyki itp.</p>
+  </div>
 
-<script>
-const leftPanel = document.getElementById('leftPanel');
-const rightPanel = document.getElementById('rightPanel');
-const toggleLeft = document.getElementById('toggleLeft');
-const toggleRight = document.getElementById('toggleRight');
+  <script>
+    const leftPanel = document.getElementById('leftPanel');
+    const rightPanel = document.getElementById('rightPanel');
+    const toggleLeft = document.getElementById('toggleLeft');
+    const toggleRight = document.getElementById('toggleRight');
 
-toggleLeft.onclick = () => {
-  leftPanel.classList.toggle('active');
-  toggleLeft.style.transform = leftPanel.classList.contains('active') ? 'translateX(300px)' : 'translateX(0)';
-};
+    toggleLeft.onclick = () => {
+      leftPanel.classList.toggle('active');
+      toggleLeft.style.transform = leftPanel.classList.contains('active') ? 'translateX(300px)' : 'translateX(0)';
+    };
 
-toggleRight.onclick = () => {
-  rightPanel.classList.toggle('active');
-  toggleRight.style.transform = rightPanel.classList.contains('active') ? 'translateX(-300px)' : 'translateX(0)';
-};
-
-
+    toggleRight.onclick = () => {
+      rightPanel.classList.toggle('active');
+      toggleRight.style.transform = rightPanel.classList.contains('active') ? 'translateX(-300px)' : 'translateX(0)';
+    };
 
 
-    
 
 
-</script>
+
+
+
+  </script>
 
 </body>
 
