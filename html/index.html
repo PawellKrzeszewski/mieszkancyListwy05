@@ -4,25 +4,31 @@
   <meta charset="utf-8" />
   <title>Mapa tras rowerowych — prosty przykład</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"/>
-  <style>
-    body { margin:0; font-family:Arial,Helvetica,sans-serif; }
-    #map { height: calc(100vh - 64px); } /* mapa zajmuje prawie cały ekran */
-    header { height:64px; padding:8px 12px; background:#f8f9fb; display:flex; align-items:center; gap:12px; }
-    .controls { margin-left:auto; display:flex; gap:8px; align-items:center; }
-    input[type=file] { display:inline-block; }
-  </style>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"/>
+    <script src="https://kit.fontawesome.com/8164e1f9c8.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
+        <div>
+            <div id="logo">
+                <a href="./index.html"><img src="" alt="logo"></a>
+            </div>
+
+            <div><a href="./index.html">nazwa apliakcji</a></div>
+        </div>
+
         <nav>
             <ul>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
+                <li><a href="#">CHATS</a></li>
+                <li><a href="#">CONTACT</a></li>
             </ul>
         </nav>
+
+        <div id="settings">
+            <i class="fa-solid fa-gear"></i>
+        </div>
+
     </header>
     
     <main>
@@ -32,7 +38,7 @@
     <footer>
 
     </footer>
-  <header>
+  <section>
     <strong>Mapa tras rowerowych — Płock (prosty)</strong>
     <div class="controls">
       <!-- przycisk do wczytania GPX -->
@@ -40,7 +46,7 @@
       <!-- prosty przycisk do przełączenia mapy CyclOSM -->
       <button id="toggleCyclo">Przełącz CyclOSM</button>
     </div>
-  </header>
+  </section>
 
   <div id="map"></div>
 

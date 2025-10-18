@@ -1,3 +1,7 @@
+/* Imports start */
+@import url('../css/header.css');
+/* Imports end */
+
 /* normalization start */
 
 *
@@ -8,10 +12,18 @@
     font-family: Arial;
 }
 
+a, i
+{
+    cursor: pointer;
+    transition: .5s;
+}
+
 a
 {
+    width: 100%;
     text-decoration: none;
-    color: black;
+    color: white;
+    padding: .5rem 1rem;
 }
 
 ul{list-style: none;}
@@ -21,6 +33,8 @@ ul{list-style: none;}
 
 
 /* main css start */
+
+#map { height: calc(100vh - 64px); } /* mapa zajmuje prawie cały ekran */
 
 
 
