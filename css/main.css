@@ -226,6 +226,8 @@ main
 .toggle-left-open {
   left: 2rem;
 }
+.white {
+    color: black;}
 
 @media (min-width: 800px) {
     section
