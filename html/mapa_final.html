@@ -28,9 +28,8 @@
 
   <div class="controls-panel" id="panel">
     <h4>Filtry</h4>
-    <label><input type="checkbox" id="filter-family" checked/> Trasy rodzinne</label>
-    <label><input type="checkbox" id="filter-sport" checked/> Trasy sportowe</label>
-    <label><input type="checkbox" id="filter-cycleways" /> Tylko ścieżki rowerowe</label>
+    <label><input type="checkbox" id="filter-family"/> Trasy rodzinne</label>
+    <label><input type="checkbox" id="filter-sport"/> Trasy sportowe</label>
     <hr/>
     <label><input type="checkbox" id="show-pois" checked/> Pokaż miejsca odpoczynku</label>
     <label><input type="checkbox" id="show-stations" checked/> Pokaż stacje roweru miejskiego</label>
@@ -54,8 +53,6 @@
     let poisLayer = L.geoJSON(null, { pointToLayer: (f,latlng)=>L.marker(latlng), onEachFeature: (f,l)=>{ if (f.properties && f.properties.name) l.bindPopup(f.properties.name); } }).addTo(map);
     let stationsLayer = L.geoJSON(null, { pointToLayer: (f,latlng)=>L.marker(latlng), onEachFeature: (f,l)=>{ if (f.properties && f.properties.name) l.bindPopup(f.properties.name); } }).addTo(map);
 
-    function styleTrasa(feature) { return { color: '#0077cc', weight: 4 }; }
-
     function onEachTrasa(feature, layer) {
       let popup = '';
       if (feature && feature.properties) {
@@ -69,29 +66,70 @@
     fetch('pois.geojson').then(r=>r.ok? r.json() : null).then(data=>{ if (data) poisLayer.addData(data); });
     fetch('stations_wgs84.geojson').then(r=>r.ok? r.json() : null).then(data=>{ if (data) stationsLayer.addData(data); });
 
-    function applyFilters(){
-      const family = document.getElementById('filter-family').checked;
-      const sport = document.getElementById('filter-sport').checked;
-      const onlyCycleways = document.getElementById('filter-cycleways').checked;
-      trasyLayer.clearLayers();
-      fetch('trasy.geojson').then(r=>r.ok? r.json() : null).then(data=>{
-        if (!data) return;
-        const feats = data.features.filter(f=>{
-          const props = f.properties || {};
-          const text = JSON.stringify(props).toLowerCase();
-          if (onlyCycleways) {
-            if (text.includes('cycleway') || text.includes('ść') || text.includes('sciez') || text.includes('bike') || text.includes('rower')) return true;
-            return false;
-          }
-          const isFamily = text.includes('rodzin') || text.includes('family') || text.includes('slow') || text.includes('łatw');
-          const isSport = text.includes('sport') || text.includes('trening') || text.includes('szyb') || text.includes('hard');
-          if (!family && isFamily) return false;
-          if (!sport && isSport) return false;
-          return true;
-        });
-        trasyLayer.addData({type:'FeatureCollection', features:feats});
-      });
-    }
+function styleTrasa(feature) {
+  const typ = (feature.properties?.typ || '').toLowerCase();
+
+  if (typ.includes('ruch uspokojony')) {
+    return { color: '#1a9850', weight: 4 }; // zielony — rodzinna
+  }
+  if (typ.includes('droga rowerowa')) {
+    return { color: '#2b83ba', weight: 4 }; // niebieski — droga rowerowa
+  }
+  return { color: '#d73027', weight: 4 }; // czerwony — sportowa
+}
+
+function applyFilters() {
+  const family = document.getElementById('filter-family').checked;
+  const sport = document.getElementById('filter-sport').checked;
+
+  trasyLayer.clearLayers();
+
+  fetch('trasy.geojson').then(r => r.ok ? r.json() : null).then(data => {
+    if (!data) return;
+
+    const feats = data.features.filter(f => {
+      const typ = (f.properties?.typ || '').toLowerCase();
+
+      // jeśli oba filtry wyłączone → pokaż wszystkie
+      if (!family && !sport) return true;
+
+      // rodzinna: tylko "ruch uspokojony"
+      if (family && typ.includes('ruch uspokojony')) return true;
+
+      // sportowa: wszystkie oprócz "ruch uspokojony" i "droga rowerowa"
+      if (sport && !typ.includes('ruch uspokojony') && !typ.includes('droga rowerowa')) return true;
+
+      return false;
+    });
+
+    trasyLayer.addData({ type: 'FeatureCollection', features: feats });
+  });
+}
+
+// 🔄 automatyczne filtrowanie przy zmianie checkboxów
+['filter-family', 'filter-sport'].forEach(id => {
+  document.getElementById(id).addEventListener('change', applyFilters);
+});
+
+// przy starcie
+applyFilters();
+
+// ✅ przywrócenie działania filtra stacji roweru miejskiego
+document.getElementById('show-stations').addEventListener('change', function (e) {
+  if (e.target.checked) map.addLayer(stationsLayer);
+  else map.removeLayer(stationsLayer);
+});
+
+
+// 🔄 automatyczne filtrowanie przy każdej zmianie checkboxa
+['filter-family', 'filter-sport', 'filter-cycleways'].forEach(id => {
+  document.getElementById(id).addEventListener('change', applyFilters);
+});
+
+// uruchom przy starcie
+applyFilters();
+
+
 
     document.getElementById('apply-filters').onclick = applyFilters;
 

@@ -65,6 +65,15 @@ document.getElementById('toggleCyclo').onclick = () => {
 if (map.hasLayer(cyclo)) { map.removeLayer(cyclo); osm.addTo(map); } 
 else { map.removeLayer(osm); cyclo.addTo(map); } 
 }; 
+            <div><a href="./index.html">SUMP — Płock</a></div>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="./GrupaRowerowa.html">CHATS</a></li>
+                <li><a href="./Kontakty.html">CONTACT</a></li>
+            </ul>
+        </nav>
 
 // 3) Funkcja rysująca GeoJSON na mapie 
 let gpxLayer = L.layerGroup().addTo(map); 
@@ -141,6 +150,63 @@ layer.bindPopup((feature.properties && feature.properties.name) || 'Miejsce odpo
     <h3>🌲 Powalone drzewa w lesie Brwilno</h3>
     <p>Utrudniony przejazd szlakiem leśnym po ostatnich wichurach. Zalecany objazd przez leśniczówkę Dzierzązna.</p>
   </div>
+    <div>
+      <button id="toggleLeft" class="slide-btn left">☰ Lewy panel</button>
+      <button id="toggleRight" class="slide-btn right">☰ Prawy panel</button>
+    </div>
+
+  <main>
+    <section>
+      <div>
+        <h1>ZNAJDŹ ŚCIEŻKI ROWEROWE!!!</h1>
+        <ul>
+          <li>Wyszukuj i odkrywaj najlepsze trasy rowerowe w Twojej okolicy!</li>
+          <li>Sprawdź, gdzie możesz wybrać się na rower – w mieście, lesie czy nad rzeką!</li>
+          <li>Przesuń mapę, powiększ i znajdź idealną trasę na dzisiejszą przejażdżkę</li>
+        </ul>
+      </div>
+      <div id="map"></div>
+
+      <div id="panel">
+          <div id="con">
+            <h2 id="h2">Filtry tras </h2>
+            <span id="colapse">—</span>
+          
+          </div>
+
+        <div id="clear">
+          
+          <label><input type="checkbox" id="filter-family"/> Trasy rodzinne</label>
+          <br>
+          <label><input type="checkbox" id="filter-sport"/> Trasy sportowe</label>
+
+          <hr/>
+          <br>
+
+          <label><input type="checkbox" id="show-pois" checked/> Pokaż miejsca odpoczynku</label>
+          <br>
+          <label><input type="checkbox" id="show-stations" checked/> Pokaż stacje roweru miejskiego</label>
+        </div>
+      </div>
+    </section>
+<!-- 
+    <div id="container">
+      <div id="panel" >
+        <div>
+          <h4>Filtry tras</h4>
+          
+          <label><input type="checkbox" id="filter-family"/> Trasy rodzinne</label>
+          <label><input type="checkbox" id="filter-sport"/> Trasy sportowe</label>
+
+          <hr/>
+
+          <label><input type="checkbox" id="show-pois" checked/> Pokaż miejsca odpoczynku</label>
+          <label><input type="checkbox" id="show-stations" checked/> Pokaż stacje roweru miejskiego</label>
+        </div>
+      </div>
+    </div> -->
+
+  </main>
 
   <div class="alert">
     <h3>💧 Podtopienia na trasie nad Wisłą</h3>
@@ -181,5 +247,53 @@ toggleRight.style.transform = rightPanel.classList.contains('active') ? 'transla
 }; 
 </script> 
 </body> 
+
+  <!-- Leaflet + skrypt mapy -->
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/@mapbox/togeojson@0.16.0/dist/togeojson.js"></script>
+  <script src="../scripts/script.js"></script>
+
+
+
+<!-- Przyciski otwierające panele -->
+
+
+<!-- Panele wysuwane -->
+<div id="leftPanel" class="side-panel left">
+  <h2>Lewa zawartość</h2>
+  <p>Tu możesz dodać np. listę tras rowerowych lub ustawienia.</p>
+</div>
+
+<div id="rightPanel" class="side-panel right">
+  <h2>Prawa zawartość</h2>
+  <p>Tu możesz dodać np. punkty POI, statystyki itp.</p>
+</div>
+
+<script>
+const leftPanel = document.getElementById('leftPanel');
+const rightPanel = document.getElementById('rightPanel');
+const toggleLeft = document.getElementById('toggleLeft');
+const toggleRight = document.getElementById('toggleRight');
+
+toggleLeft.onclick = () => {
+  leftPanel.classList.toggle('active');
+  toggleLeft.style.transform = leftPanel.classList.contains('active') ? 'translateX(300px)' : 'translateX(0)';
+};
+
+toggleRight.onclick = () => {
+  rightPanel.classList.toggle('active');
+  toggleRight.style.transform = rightPanel.classList.contains('active') ? 'translateX(-300px)' : 'translateX(0)';
+};
+
+
+
+
+    
+
+
+</script>
+
+</body>
+
 </html>
 
