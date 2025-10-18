@@ -1,10 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <link rel="stylesheet" href="../css/main.css">
-    <script defer src="../scripts/script.js"></script>
+  <meta charset="utf-8" />
+  <title>Mapa tras rowerowych — prosty przykład</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"/>
+  <style>
+    body { margin:0; font-family:Arial,Helvetica,sans-serif; }
+    #map { height: calc(100vh - 64px); } /* mapa zajmuje prawie cały ekran */
+    header { height:64px; padding:8px 12px; background:#f8f9fb; display:flex; align-items:center; gap:12px; }
+    .controls { margin-left:auto; display:flex; gap:8px; align-items:center; }
+    input[type=file] { display:inline-block; }
+  </style>
 </head>
 <body>
     <header>
@@ -24,5 +32,103 @@
     <footer>
         
     </footer>
+  <header>
+    <strong>Mapa tras rowerowych — Płock (prosty)</strong>
+    <div class="controls">
+      <!-- przycisk do wczytania GPX -->
+      <label>Wczytaj GPX: <input id="gpxfile" type="file" accept=".gpx" /></label>
+      <!-- prosty przycisk do przełączenia mapy CyclOSM -->
+      <button id="toggleCyclo">Przełącz CyclOSM</button>
+    </div>
+  </header>
+
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <!-- togeojson: konwerter GPX -> GeoJSON -->
+  <script src="https://unpkg.com/@mapbox/togeojson@0.16.0/dist/togeojson.js"></script>
+
+  <script>
+    // 1) Utwórz mapę i ustaw widok na Płock
+    const map = L.map('map').setView([52.546, 19.700], 12);
+
+    // 2) Dwie warstwy: zwykłe OSM i CyclOSM (mapa rowerowa)
+    const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const cyclo = L.tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png', {
+      attribution: '&copy; CyclOSM & OpenStreetMap contributors'
+    });
+
+    document.getElementById('toggleCyclo').onclick = () => {
+      if (map.hasLayer(cyclo)) { map.removeLayer(cyclo); osm.addTo(map); }
+      else { map.removeLayer(osm); cyclo.addTo(map); }
+    };
+
+    // 3) Funkcja rysująca GeoJSON na mapie
+    let gpxLayer = L.layerGroup().addTo(map);
+    function drawGeoJSON(geojson) {
+      // wyczyść poprzednie
+      gpxLayer.clearLayers();
+      // jeżeli to trasa (LineString), narysuj polylinię i ustaw widok
+      L.geoJSON(geojson, {
+        onEachFeature: function (feature, layer) {
+          // popup z nazwą jeśli jest
+          if (feature.properties && feature.properties.name) {
+            layer.bindPopup(feature.properties.name);
+          }
+        },
+        style: function(feature) {
+          if (feature.geometry && feature.geometry.type === 'LineString') {
+            return { color: '#ff3333', weight: 4 };
+          }
+          return {};
+        },
+        pointToLayer: function (feature, latlng) {
+          return L.marker(latlng);
+        }
+      }).addTo(gpxLayer);
+      // dopasuj zoom do danych
+      try { map.fitBounds(gpxLayer.getBounds(), { padding:[20,20] }); } catch(e){ /* brak bounds */ }
+    }
+
+    // 4) Obsługa wczytywania pliku GPX
+    document.getElementById('gpxfile').addEventListener('change', function(evt){
+      const f = evt.target.files[0];
+      if (!f) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const gpxText = e.target.result;
+        // parsujemy GPX na DOM, a potem konwertujemy do GeoJSON (togeojson)
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(gpxText, "application/xml");
+        const geojson = toGeoJSON.gpx(xml);
+        if (!geojson || !geojson.features || geojson.features.length === 0) {
+          alert('Plik GPX nie zawiera śladu.');
+          return;
+        }
+        drawGeoJSON(geojson);
+        // (opcjonalnie) tutaj możesz wysłać GPX na serwer via fetch('/api/gpx', {method:'POST', body: formData})
+      };
+      reader.readAsText(f);
+    });
+
+    // 5) Załaduj - opcjonalnie - plik pois.geojson jeśli chcesz dodać punkty odpoczynku
+    // Jeśli w tym samym folderze umieszczasz pois.geojson, odkomentuj poniższy kod:
+    fetch('pois.geojson').then(r => {
+      if (!r.ok) return;
+      return r.json();
+    }).then(data => {
+      if (!data) return;
+      L.geoJSON(data, {
+        pointToLayer: (feature, latlng) => L.marker(latlng),
+        onEachFeature: (feature, layer) => {
+          layer.bindPopup((feature.properties && feature.properties.name) || 'Miejsce odpoczynku');
+        }
+      }).addTo(map);
+    }).catch(()=>{/* brak pois.geojson - ok */});
+  </script>
 </body>
 </html>
