@@ -188,7 +188,9 @@ main
   font-size: 17px;
   color: #b30000;
 }
-
+#cnotainer1 {
+    background-color: #fff;
+}
 .alert p {
   margin: 0;
   font-size: 14px;
