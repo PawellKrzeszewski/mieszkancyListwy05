@@ -114,29 +114,3 @@ document.getElementById('show-stations').addEventListener('change', e=>{
 
 // === inicjalizacja ===
 applyFilters();
-
-
-const btn = document.querySelector("#colapse");
-const panel = document.querySelector("#panel");
-const clear = document.querySelector("#clear");
-const h2 = document.querySelector("#h2");
-
-let isOpen = true; // stan panelu: otwarty
-
-btn.addEventListener("click", () => {
-    if (isOpen) {
-        panel.style.width = "3%";
-        clear.style.display = "none";
-        h2.style.display = "none";
-        btn.innerHTML = "+";
-        console.log("if")
-    } else {
-        panel.style.width = "28%";
-        clear.style.display = "block";
-        h2.style.display = "block";
-        btn.innerHTML = "—";
-        console.log("else")
-    }
-
-    isOpen = !isOpen; // zmiana stanu
-});
