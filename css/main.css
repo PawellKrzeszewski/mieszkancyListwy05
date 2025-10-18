@@ -118,10 +118,11 @@ main
 
 /* main css end */
 /* wspólne style dla paneli */
+/* Panele boczne */
 .side-panel {
   position: fixed;
-  top: 0;
-  width: 300px;
+  top: 0; /* poniżej headera */
+  width: 400px;
   height: 100%;
   background: #fff;
   box-shadow: 2px 0 10px rgba(0,0,0,0.3);
@@ -151,8 +152,8 @@ main
 /* Przyciski otwierające panele */
 .slide-btn {
   position: fixed;
-  top: 20px;
-  z-index: 1100;
+  top: 80px; /* nieco niżej niż panel, bardziej estetycznie */
+  z-index: 1010;
   padding: 10px 15px;
   background: #333;
   color: #fff;
@@ -160,6 +161,15 @@ main
   cursor: pointer;
   border-radius: 4px;
   transition: transform 0.3s ease;
+  font-size: 16px;
 }
-.slide-btn.left { left: 0; transform: translateX(0); }
-.slide-btn.right { right: 0; transform: translateX(0); }
+
+/* Lewy przycisk */
+.slide-btn.left {
+  left: 10px; /* przy lewej krawędzi ekranu */
+}
+
+/* Prawy przycisk */
+.slide-btn.right {
+  right: 10px; /* przy prawej krawędzi ekranu */
+}
