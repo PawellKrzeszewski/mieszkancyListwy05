@@ -145,5 +145,37 @@
       }).addTo(map);
     }).catch(()=>{/* brak pois.geojson - ok */});
   </script>
+<!-- Przyciski otwierające panele -->
+<button id="toggleLeft" class="slide-btn left">☰ Lewy panel</button>
+<button id="toggleRight" class="slide-btn right">☰ Prawy panel</button>
+
+<!-- Panele wysuwane -->
+<div id="leftPanel" class="side-panel left">
+  <h2>Lewa zawartość</h2>
+  <p>Tu możesz dodać np. listę tras rowerowych lub ustawienia.</p>
+</div>
+
+<div id="rightPanel" class="side-panel right">
+  <h2>Prawa zawartość</h2>
+  <p>Tu możesz dodać np. punkty POI, statystyki itp.</p>
+</div>
+<script>
+const leftPanel = document.getElementById('leftPanel');
+const rightPanel = document.getElementById('rightPanel');
+const toggleLeft = document.getElementById('toggleLeft');
+const toggleRight = document.getElementById('toggleRight');
+
+toggleLeft.onclick = () => {
+  leftPanel.classList.toggle('active');
+  toggleLeft.style.transform = leftPanel.classList.contains('active') ? 'translateX(300px)' : 'translateX(0)';
+};
+
+toggleRight.onclick = () => {
+  rightPanel.classList.toggle('active');
+  toggleRight.style.transform = rightPanel.classList.contains('active') ? 'translateX(-300px)' : 'translateX(0)';
+};
+
+</script>
+
 </body>
 </html>
