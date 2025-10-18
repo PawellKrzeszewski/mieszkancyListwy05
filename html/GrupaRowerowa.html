@@ -84,6 +84,18 @@
 
 </div>
 
+<div id="overlay">
+  <div id="modal">
+    <h2 class="white">Ustawienia</h2>
+    <ul id="lista">
+      <li>Profil</li>
+      <li>Motyw strony</li>
+      <hr>
+      <li>Lokalizacja GPX</li>
+    </ul>
+  </div>
+</div>
+
 <script>
     // --- Funkcja rozwijania kart ---
     function setupExpandButtons() {
@@ -151,6 +163,21 @@
 
         setupExpandButtons(); // ponowne aktywowanie przycisków
     });
+
+
+    const button = document.getElementById('settings');
+  const overlay = document.getElementById('overlay');
+
+  button.addEventListener('click', () => {
+    overlay.style.display = overlay.style.display === 'flex' ? 'none' : 'flex';
+  });
+
+  // Kliknięcie na overlay zamyka modal
+  overlay.addEventListener('click', (e) => {
+    if(e.target === overlay) {
+      overlay.style.display = 'none';
+    }
+  });
 </script>
 </body>
 </html>

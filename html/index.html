@@ -96,9 +96,18 @@
   <script src="https://unpkg.com/@mapbox/togeojson@0.16.0/dist/togeojson.js"></script>
   <script src="../scripts/script.js"></script>
 
+<div id="overlay">
+  <div id="modal">
+    <h2 class="white">Ustawienia</h2>
+    <ul id="lista">
+      <li>Profil</li>
+      <li>Motyw strony</li>
+      <hr>
+      <li>Lokalizacja GPX</li>
+    </ul>
+  </div>
+</div>
 
-
-<!-- Przyciski otwierające panele -->
 
 
 <!-- Panele wysuwane -->
@@ -223,6 +232,8 @@
 
 </div>
 
+
+
 <script>
 const leftPanel = document.getElementById('leftPanel');
 const rightPanel = document.getElementById('rightPanel');
@@ -239,9 +250,22 @@ toggleRight.onclick = () => {
   toggleRight.style.transform = rightPanel.classList.contains('active') ? 'translateX(-400px)' : 'translateX(0)';
 };
 
-  
+
+
+
+const button = document.getElementById('settings');
+  const overlay = document.getElementById('overlay');
+
+  button.addEventListener('click', () => {
+    overlay.style.display = overlay.style.display === 'flex' ? 'none' : 'flex';
+  });
+
+  // Kliknięcie na overlay zamyka modal
+  overlay.addEventListener('click', (e) => {
+    if(e.target === overlay) {
+      overlay.style.display = 'none';
+    }
+  });
 </script>
-
 </body>
-
 </html>

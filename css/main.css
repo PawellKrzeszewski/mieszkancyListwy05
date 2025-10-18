@@ -190,7 +190,7 @@ main
   color: #b30000;
 }
 #cnotainer1 {
-    background-color: #fff;
+    background-color: hsl(0, 0%, 85%);
 }
 .alert p {
   margin: 0;
@@ -264,3 +264,60 @@ main
 .toggle-left-open {
   left: 2rem;
 }
+.white {
+    color: black;
+}
+
+
+
+/* Overlay pełnoekranowy */
+  #overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5); /* 50% przezroczystości */
+    display: none; /* na początku ukryty */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  /* Środkowy div */
+  #modal {
+    background-color: white;
+    padding: 30px 50px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 80%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  }
+
+
+  #lista {
+    list-style: none; /* usuwa punkty listy */
+    padding: 0;
+    width: 250px; /* szerokość listy */
+    border: 1px solid #ccc; /* obramowanie całej listy */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  #lista li {
+    font-size: 20px; /* większa czcionka */
+    padding: 15px 20px;
+    background-color: #f9f9f9;
+    text-align: left; /* wyrównanie do lewej */
+  }
+
+  #lista li:not(:last-child) {
+    border-bottom: 1px solid #ccc; /* linia oddzielająca elementy */
+  }
+
+  /* Opcjonalnie: efekt hover */
+  #lista li:hover {
+    background-color: #e0e0e0;
+    cursor: pointer;
+  }
