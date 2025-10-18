@@ -1,0 +1,75 @@
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zgłoszenie rowerowe Płock</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eef4f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 500px;
+    }
+    h2 {
+      text-align: center;
+      color: #2a5d84;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      resize: none;
+      font-size: 15px;
+    }
+    button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background-color: #2a5d84;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #1e3f5a;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Zgłoszenie rowerowe</h2>
+    <form id="reportForm">
+      <textarea id="message" placeholder="Opisz swoje zgłoszenie..." required></textarea>
+      <button type="submit">Wyślij zgłoszenie</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("reportForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const message = document.getElementById("message").value.trim();
+      if (message) {
+        const subject = encodeURIComponent("Zgłoszenie rowerowe");
+        const body = encodeURIComponent(message);
+        window.location.href = `mailto:rowerowy@plock.eu?subject=${subject}&body=${body}`;
+      } else {
+        alert("Proszę wpisać treść zgłoszenia!");
+      }
+    });
+  </script>
+</body>
+</html>
