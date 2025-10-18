@@ -1,0 +1,119 @@
+
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <title>Mapa tras rowerowych — Płock (final)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"/>
+  <style>
+    body { margin:0; font-family:Arial,Helvetica,sans-serif; }
+    #map { height: calc(100vh - 80px); }
+    header { height:80px; padding:8px 12px; background:#f8f9fb; display:flex; align-items:center; gap:12px; }
+    .controls { margin-left:auto; display:flex; gap:8px; align-items:center; }
+    aside.controls-panel { position: absolute; left:10px; top:90px; z-index:1000; background:rgba(255,255,255,0.95); padding:10px; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.2); }
+    label { display:block; margin-bottom:6px; }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>Mapa tras rowerowych — Płock</strong>
+    <div class="controls">
+      <label>Wczytaj GPX: <input id="gpxfile" type="file" accept=".gpx" /></label>
+      <button id="toggleCyclo">Przełącz CyclOSM</button>
+    </div>
+  </header>
+
+  <div id="map"></div>
+
+  <div class="controls-panel" id="panel">
+    <h4>Filtry</h4>
+    <label><input type="checkbox" id="filter-family" checked/> Trasy rodzinne</label>
+    <label><input type="checkbox" id="filter-sport" checked/> Trasy sportowe</label>
+    <label><input type="checkbox" id="filter-cycleways" /> Tylko ścieżki rowerowe</label>
+    <hr/>
+    <label><input type="checkbox" id="show-pois" checked/> Pokaż miejsca odpoczynku</label>
+    <label><input type="checkbox" id="show-stations" checked/> Pokaż stacje roweru miejskiego</label>
+    <button id="apply-filters">Zastosuj filtry</button>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/@mapbox/togeojson@0.16.0/dist/togeojson.js"></script>
+
+  <script>
+    const map = L.map('map').setView([52.546, 19.700], 12);
+    const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
+    const cyclo = L.tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png', { attribution: '&copy; CyclOSM & OpenStreetMap contributors' });
+
+    document.getElementById('toggleCyclo').onclick = () => {
+      if (map.hasLayer(cyclo)) { map.removeLayer(cyclo); osm.addTo(map); }
+      else { map.removeLayer(osm); cyclo.addTo(map); }
+    };
+
+    let trasyLayer = L.geoJSON(null, { style: styleTrasa, onEachFeature: onEachTrasa }).addTo(map);
+    let poisLayer = L.geoJSON(null, { pointToLayer: (f,latlng)=>L.marker(latlng), onEachFeature: (f,l)=>{ if (f.properties && f.properties.name) l.bindPopup(f.properties.name); } }).addTo(map);
+    let stationsLayer = L.geoJSON(null, { pointToLayer: (f,latlng)=>L.marker(latlng), onEachFeature: (f,l)=>{ if (f.properties && f.properties.name) l.bindPopup(f.properties.name); } }).addTo(map);
+
+    function styleTrasa(feature) { return { color: '#0077cc', weight: 4 }; }
+
+    function onEachTrasa(feature, layer) {
+      let popup = '';
+      if (feature && feature.properties) {
+        if (feature.properties.name) popup += '<b>'+feature.properties.name+'</b><br/>';
+        for (let k in feature.properties) { popup += '<i>'+k+':</i> '+feature.properties[k]+'<br/>'; }
+      }
+      if (popup) layer.bindPopup(popup);
+    }
+
+    fetch('trasy.geojson').then(r=>r.ok? r.json() : null).then(data=>{ if (data) trasyLayer.addData(data); });
+    fetch('pois.geojson').then(r=>r.ok? r.json() : null).then(data=>{ if (data) poisLayer.addData(data); });
+    fetch('stations_wgs84.geojson').then(r=>r.ok? r.json() : null).then(data=>{ if (data) stationsLayer.addData(data); });
+
+    function applyFilters(){
+      const family = document.getElementById('filter-family').checked;
+      const sport = document.getElementById('filter-sport').checked;
+      const onlyCycleways = document.getElementById('filter-cycleways').checked;
+      trasyLayer.clearLayers();
+      fetch('trasy.geojson').then(r=>r.ok? r.json() : null).then(data=>{
+        if (!data) return;
+        const feats = data.features.filter(f=>{
+          const props = f.properties || {};
+          const text = JSON.stringify(props).toLowerCase();
+          if (onlyCycleways) {
+            if (text.includes('cycleway') || text.includes('ść') || text.includes('sciez') || text.includes('bike') || text.includes('rower')) return true;
+            return false;
+          }
+          const isFamily = text.includes('rodzin') || text.includes('family') || text.includes('slow') || text.includes('łatw');
+          const isSport = text.includes('sport') || text.includes('trening') || text.includes('szyb') || text.includes('hard');
+          if (!family && isFamily) return false;
+          if (!sport && isSport) return false;
+          return true;
+        });
+        trasyLayer.addData({type:'FeatureCollection', features:feats});
+      });
+    }
+
+    document.getElementById('apply-filters').onclick = applyFilters;
+
+    document.getElementById('show-pois').addEventListener('change', function(e){ if (e.target.checked) poisLayer.addTo(map); else map.removeLayer(poisLayer); });
+    document.getElementById('show-stations').addEventListener('change', function(e){ if (e.target.checked) stationsLayer.addTo(map); else map.removeLayer(stationsLayer); });
+
+    let gpxLayer = L.layerGroup().addTo(map);
+    document.getElementById('gpxfile').addEventListener('change', function(evt){
+      const f = evt.target.files[0]; if (!f) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const gpxText = e.target.result;
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(gpxText, "application/xml");
+        const geojson = toGeoJSON.gpx(xml);
+        if (!geojson) return alert('Brak śladu w pliku GPX');
+        gpxLayer.clearLayers();
+        L.geoJSON(geojson, { style: { color:'#ff3333', weight:4 }, pointToLayer: (f,latlng)=>L.circleMarker(latlng,{radius:4}) }).addTo(gpxLayer);
+        try { map.fitBounds(gpxLayer.getBounds(), {padding:[20,20]}); } catch(e) {}
+      };
+      reader.readAsText(f);
+    });
+  </script>
+</body>
+</html>
