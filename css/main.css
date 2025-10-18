@@ -122,7 +122,7 @@ main
 .side-panel {
   position: fixed;
   top: 0; /* poniżej headera */
-  width: 400px;
+  width: 450px;
   height: 100%;
   background: #fff;
   box-shadow: 2px 0 10px rgba(0,0,0,0.3);
@@ -260,4 +260,7 @@ main
 
 .toggle-left-open {
   left: 2rem;
+}
+.white{
+    color: black;
 }
