@@ -1,0 +1,395 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.685721,
+          52.544611
+        ]
+      },
+      "properties": {
+        "Field1": "Stary Rynek"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.67978,
+          52.545768
+        ]
+      },
+      "properties": {
+        "Field1": "Zalew Sob?tka"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.674312,
+          52.550424
+        ]
+      },
+      "properties": {
+        "Field1": "K. Wielkiego - Dobrzy?ska"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.653678,
+          52.558075
+        ]
+      },
+      "properties": {
+        "Field1": "Medyczna - Szpital"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.668534,
+          52.5576
+        ]
+      },
+      "properties": {
+        "Field1": "Dobrzy?ska - Ga?czy?skiego"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.682577,
+          52.559001
+        ]
+      },
+      "properties": {
+        "Field1": "?ukasiewicza - Orlen Arena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.682971,
+          52.554467
+        ]
+      },
+      "properties": {
+        "Field1": "?ukasiewicza - Miodowa"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.68787,
+          52.55315
+        ]
+      },
+      "properties": {
+        "Field1": "Tysi?clecia - Nowaka"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.692413,
+          52.556215
+        ]
+      },
+      "properties": {
+        "Field1": "Rembieli?skiego - Gawareckiego"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.690318,
+          52.549954
+        ]
+      },
+      "properties": {
+        "Field1": "Kobyli?skiego - Bielska"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.700007,
+          52.548216
+        ]
+      },
+      "properties": {
+        "Field1": "Jachowicza - Sportowa"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.708428,
+          52.546043
+        ]
+      },
+      "properties": {
+        "Field1": "Pi?sudskiego - Otoli?ska"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.718323,
+          52.543724
+        ]
+      },
+      "properties": {
+        "Field1": "Pi?sudskiego - Chopina"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.728589,
+          52.540877
+        ]
+      },
+      "properties": {
+        "Field1": "Pi?sudskiego - Jeziorowskich"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.71164,
+          52.551061
+        ]
+      },
+      "properties": {
+        "Field1": "Chopina - Dworcowa"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.749898,
+          52.543399
+        ]
+      },
+      "properties": {
+        "Field1": "Armii Krajowej - Walecznych"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.7627,
+          52.539033
+        ]
+      },
+      "properties": {
+        "Field1": "Armii Krajowej - Kutrzeby"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.758315,
+          52.532349
+        ]
+      },
+      "properties": {
+        "Field1": "Jana Paw?a II - CM Rodzina"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.751567,
+          52.530618
+        ]
+      },
+      "properties": {
+        "Field1": "Jana Paw?a II - Paderewskiego"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.716906,
+          52.539471
+        ]
+      },
+      "properties": {
+        "Field1": "Sp??dzielcza - Wyszogrodzka"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.701676,
+          52.537935
+        ]
+      },
+      "properties": {
+        "Field1": "Kili?skiego - Warszawska"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.694607,
+          52.542622
+        ]
+      },
+      "properties": {
+        "Field1": "Kolegialna - Pl. Obr. Warszawy"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.688929,
+          52.543049
+        ]
+      },
+      "properties": {
+        "Field1": "Pl. Narutowicza"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.691468,
+          52.545233
+        ]
+      },
+      "properties": {
+        "Field1": "Sienkiewicza - Tumska"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.76878,
+          52.51409
+        ]
+      },
+      "properties": {
+        "Field1": "Harcerska - ?elazna"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.69811,
+          52.56075
+        ]
+      },
+      "properties": {
+        "Field1": "Przemys?owa - NSZ"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.72477,
+          52.53548
+        ]
+      },
+      "properties": {
+        "Field1": "G?rna"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.64106,
+          52.56087
+        ]
+      },
+      "properties": {
+        "Field1": "Traktowa - Szpitalna"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.6977454,
+          52.539248
+        ]
+      },
+      "properties": {
+        "Field1": "PL Dabrowskiego"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.7161311,
+          52.5479381
+        ]
+      },
+      "properties": {
+        "Field1": "Otolinska - CAS"
+      }
+    }
+  ]
+}
