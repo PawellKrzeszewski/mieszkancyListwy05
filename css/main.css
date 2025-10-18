@@ -62,7 +62,7 @@ main
     {
         display: flex;
         justify-content: space-around;
-        margin: 0 2rem;
+        margin: 0 2rem 4rem;
 
         &> div
         {
@@ -107,6 +107,11 @@ main
                 font-weight: bold;
             }
         }
+    }
+
+    & section:last-child
+    {
+        height: 40vh;
     }
 }
 
