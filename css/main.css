@@ -109,10 +109,6 @@ main
         }
     }
 
-    & section:last-child
-    {
-        height: 40vh;
-    }
 }
 
 
