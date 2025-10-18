@@ -226,3 +226,10 @@ main
 .toggle-left-open {
   left: 2rem;
 }
+
+@media (min-width: 800px) {
+    section
+    {
+        flex-direction: column;
+    }
+}
