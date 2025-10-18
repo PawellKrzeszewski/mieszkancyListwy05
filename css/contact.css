@@ -1,10 +1,10 @@
-    .container {
+    .containerr {
         background-color: hsl(16, 100%, 38%);
       padding: 25px;
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      width: 90%;
-      max-width: 80%;
+      width: 80%;
+      margin: 0 auto;
     }
     h2 {
       text-align: center;
@@ -25,11 +25,11 @@
       padding: 12px;
       border: none;
       border-radius: 10px;
-      background-color: #2a5d84;
+      background-color: #202020;
       color: white;
       font-size: 16px;
       cursor: pointer;
     }
     button:hover {
-      background-color: #1e3f5a;
+      background-color: #151515;
     }
