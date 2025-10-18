@@ -321,3 +321,33 @@ main
     background-color: #e0e0e0;
     cursor: pointer;
   }
+
+    #submitButton1 {
+    padding: 10px 20px;
+    margin-top: 20px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+ 
+
+  /* Overlay pełnoekranowy */
+  #overlay1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    transition: opacity 1s ease;
+  }
