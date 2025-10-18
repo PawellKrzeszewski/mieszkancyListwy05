@@ -119,10 +119,11 @@ main
 
 /* main css end */
 /* wspólne style dla paneli */
+/* Panele boczne */
 .side-panel {
   position: fixed;
-  top: 0;
-  width: 300px;
+  top: 0; /* poniżej headera */
+  width: 450px;
   height: 100%;
   background: #fff;
   box-shadow: 2px 0 10px rgba(0,0,0,0.3);
@@ -152,8 +153,8 @@ main
 /* Przyciski otwierające panele */
 .slide-btn {
   position: fixed;
-  top: 20px;
-  z-index: 1100;
+  top: 80px; /* nieco niżej niż panel, bardziej estetycznie */
+  z-index: 1010;
   padding: 10px 15px;
   background: #333;
   color: #fff;
@@ -161,6 +162,43 @@ main
   cursor: pointer;
   border-radius: 4px;
   transition: transform 0.3s ease;
+  font-size: 16px;
+}
+
+/* Lewy przycisk */
+.slide-btn.left {
+  left: 10px; /* przy lewej krawędzi ekranu */
+}
+
+/* Prawy przycisk */
+.slide-btn.right {
+  right: 10px; /* przy prawej krawędzi ekranu */
+}
+/* Styl alertów w panelu */
+.alert {
+  background: #ffeaea;
+  border-left: 5px solid #ff4d4d;
+  border-radius: 6px;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.alert h3 {
+  margin: 0 0 5px 0;
+  font-size: 17px;
+  color: #b30000;
+}
+#cnotainer1 {
+    background-color: hsl(0, 0%, 85%);
+}
+.alert p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+#obramowanie {
+    padding-top: 10px;
 }
 .slide-btn.left {top:6rem; left: 2rem; transform: translateX(0); }
 .slide-btn.right {top:6rem; right: 2rem; transform: translateX(0); }
@@ -227,11 +265,59 @@ main
   left: 2rem;
 }
 .white {
-    color: black;}
-
-@media (min-width: 800px) {
-    section
-    {
-        flex-direction: column;
-    }
+    color: black;
 }
+
+
+
+/* Overlay pełnoekranowy */
+  #overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5); /* 50% przezroczystości */
+    display: none; /* na początku ukryty */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  /* Środkowy div */
+  #modal {
+    background-color: white;
+    padding: 30px 50px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 80%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  }
+
+
+  #lista {
+    list-style: none; /* usuwa punkty listy */
+    padding: 0;
+    width: 250px; /* szerokość listy */
+    border: 1px solid #ccc; /* obramowanie całej listy */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  #lista li {
+    font-size: 20px; /* większa czcionka */
+    padding: 15px 20px;
+    background-color: #f9f9f9;
+    text-align: left; /* wyrównanie do lewej */
+  }
+
+  #lista li:not(:last-child) {
+    border-bottom: 1px solid #ccc; /* linia oddzielająca elementy */
+  }
+
+  /* Opcjonalnie: efekt hover */
+  #lista li:hover {
+    background-color: #e0e0e0;
+    cursor: pointer;
+  }
