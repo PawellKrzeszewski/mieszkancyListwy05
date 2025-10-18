@@ -125,15 +125,17 @@ let isOpen = true; // stan panelu: otwarty
 
 btn.addEventListener("click", () => {
     if (isOpen) {
-        panel.style.width = "3  %";
+        panel.style.width = "3%";
         clear.style.display = "none";
         h2.style.display = "none";
         btn.innerHTML = "+";
+        console.log("if")
     } else {
         panel.style.width = "28%";
         clear.style.display = "block";
         h2.style.display = "block";
         btn.innerHTML = "—";
+        console.log("else")
     }
 
     isOpen = !isOpen; // zmiana stanu

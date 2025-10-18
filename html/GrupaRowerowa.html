@@ -4,188 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Grupy rowerowe</title>
-<style>
-    body {
-        font-family: 'Segoe UI', Tahoma, sans-serif;
-        background: linear-gradient(135deg, #f8f9fa, #e0e7ff);
-        margin: 0;
-        padding: 40px;
-    }
+    <script src="https://kit.fontawesome.com/8164e1f9c8.js" crossorigin="anonymous"></script>
 
-    h2, h3 {
-        text-align: center;
-        color: #333;
-        margin-bottom: 20px;
-    }
-
-    .container {
-        max-width: 900px;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        gap: 40px;
-    }
-
-    /* --- SEKCJA LISTY GRUP --- */
-    .group-list {
-        background-color: #ffffff;
-        border-radius: 15px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        padding: 30px;
-        transition: all 0.3s ease;
-    }
-
-    .group-card {
-        background: #fefefe;
-        border-radius: 12px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-        padding: 15px 20px;
-        margin-bottom: 20px;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        cursor: pointer;
-        overflow: hidden;
-    }
-
-    .group-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-    }
-
-    .group-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-    }
-
-    .group-info {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .group-avatar {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        border: 3px solid #c22e5c;
-        flex-shrink: 0;
-        background-size: cover;
-        background-position: center;
-    }
-
-    .group-text {
-        color: #6b2c74;
-        font-size: 14px;
-        line-height: 1.4;
-    }
-
-    .group-text strong {
-        font-size: 15px;
-        display: block;
-        margin-bottom: 2px;
-    }
-
-    .expand {
-        border: none;
-        background: none;
-        font-size: 22px;
-        cursor: pointer;
-        transition: transform 0.3s ease;
-        color: #444;
-    }
-
-    .expand.rotated {
-        transform: rotate(180deg);
-    }
-
-    /* --- ROZWIJANE INFO --- */
-    .group-details {
-        max-height: 0;
-        overflow: hidden;
-        transition: all 0.4s ease-in-out;
-        color: #5a2763;
-        padding-left: 62px;
-        font-size: 14px;
-        opacity: 0;
-    }
-
-    .group-card.active .group-details {
-        max-height: 200px;
-        opacity: 1;
-        margin-top: 10px;
-    }
-
-    .join {
-        color: #3ab54a;
-        font-weight: bold;
-        display: inline-block;
-        margin-top: 8px;
-        transition: transform 0.2s ease, color 0.2s ease;
-    }
-
-    .join:hover {
-        transform: scale(1.05);
-        color: #2c993a;
-    }
-
-    /* --- SEKCJA TWORZENIA GRUPY --- */
-    .create-group {
-        background: #ffffff;
-        border-radius: 15px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        padding: 30px;
-    }
-
-    .form-box {
-        display: grid;
-        gap: 12px;
-        margin-top: 10px;
-    }
-
-    .form-box label {
-        font-weight: 600;
-        color: #4b2b52;
-    }
-
-    .form-box input, .form-box textarea {
-        width: 100%;
-        padding: 8px 10px;
-        border: 1px solid #aaa;
-        border-radius: 8px;
-        font-size: 14px;
-        outline: none;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .form-box input:focus, .form-box textarea:focus {
-        border-color: #9f3cc7;
-        box-shadow: 0 0 4px rgba(159, 60, 199, 0.4);
-    }
-
-    .form-box textarea {
-        resize: none;
-        height: 80px;
-    }
-
-    .create-btn {
-        background: #7b3ecf;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 8px;
-        font-size: 15px;
-        cursor: pointer;
-        transition: background 0.3s ease, transform 0.2s ease;
-    }
-
-    .create-btn:hover {
-        background: #682bb8;
-        transform: translateY(-2px);
-    }
-</style>
+<link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
+        <header>
+        <div>
+            <div id="logo">
+                <a href="./index.html"><img src="" alt="logo"></a>
+            </div>
+
+            <div><a href="./index.html">SUMP — Płock</a></div>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="./GrupaRowerowa.html">CHATS</a></li>
+                <li><a href="./Kontakty.html">CONTACT</a></li>
+            </ul>
+        </nav>
+
+        <div id="settings">
+            <i class="fa-solid fa-gear"></i>
+        </div>
+
+    </header>
 
 <div class="container">
 
@@ -217,7 +61,7 @@
         <h3>Stwórz Grupę rowerową</h3>
         <div class="form-box">
             <label>Zdjęcie profilowe grupy:</label>
-            <input type="file" id="groupImage">
+            <input style="color: white;" type="file" id="groupImage">
 
             <label>Nazwa grupy:</label>
             <input type="text" id="groupName" placeholder="Wpisz nazwę grupy">
@@ -250,6 +94,8 @@
 
                 document.querySelectorAll('.group-card').forEach(c => c.classList.remove('active'));
                 document.querySelectorAll('.expand').forEach(b => b.classList.remove('rotated'));
+                let toggleLeft = document.querySelector("#toggleLeft")
+                let toggleRight = document.querySelector("#toggleRight")
 
                 if (!isActive) {
                     card.classList.add('active');
@@ -293,7 +139,7 @@
             </div>
             <div class="group-details">
                 <p><strong>Trasa i cel:</strong> ${goal} (${loc})</p>
-                <span class="join">Dołącz +</span>
+                <span style="margin-top: 5rem;" class="join">Dołącz +</span>
             </div>
         `;
 

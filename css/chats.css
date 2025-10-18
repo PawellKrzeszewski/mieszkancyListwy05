@@ -1,0 +1,178 @@
+    h2, h3 {
+        text-align: center;
+        color: white;
+        margin-bottom: 20px;
+    }
+
+    .container {
+        max-width: 80%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    /* --- SEKCJA LISTY GRUP --- */
+    .group-list {
+        background-color: hsl(16, 100%, 38%);
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        padding: 30px;
+        transition: all 0.3s ease;
+    }
+
+    .group-card {
+        background: #202020;
+        color: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        padding: 15px 20px;
+        margin-bottom: 20px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: pointer;
+        overflow: hidden;
+    }
+
+    .group-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    }
+
+    .group-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .group-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .group-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 3px solid white;
+        flex-shrink: 0;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .group-text {
+        color: white;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .group-text strong {
+        font-size: 15px;
+        display: block;
+        margin-bottom: 2px;
+    }
+
+    .expand {
+        border: none;
+        background: none;
+        font-size: 22px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        color: #444;
+    }
+
+    .expand.rotated {
+        transform: rotate(180deg);
+    }
+
+    /* --- ROZWIJANE INFO --- */
+    .group-details {
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.4s ease-in-out;
+        color: white;
+        padding-left: 62px;
+        font-size: 14px;
+        opacity: 0;
+    }
+
+    .group-card.active .group-details {
+        max-height: 200px;
+        opacity: 1;
+        margin-top: 10px;
+    }
+
+    .join {
+        color: #3ab54a;
+        font-weight: bold;
+        display: inline-block;
+        margin-top: 8px;
+        transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .join:hover {
+        transform: scale(1.05);
+        color: #2c993a;
+    }
+
+    /* --- SEKCJA TWORZENIA GRUPY --- */
+    .create-group {
+        background-color: hsl(16, 100%, 38%);
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        padding: 2rem 4rem;
+        margin-bottom: 2rem;
+    }
+
+    .form-box {
+        display: grid;
+        gap: 12px;
+        margin-top: 10px;
+        background-color: #202020;
+    padding: .5rem 1rem;
+    border-radius: 1rem;
+    }
+
+    .form-box label {
+        font-weight: 600;
+        color: white;
+    }
+
+    .form-box input, .form-box textarea {
+        width: 100%;
+        padding: 8px 10px;
+        border: 1px solid #aaa;
+        border-radius: 8px;
+        font-size: 14px;
+        outline: none;
+        margin-bottom: 2rem ;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .form-box input:focus, .form-box textarea:focus {
+        border-color: white;
+    }
+
+    .form-box textarea {
+        resize: none;
+        height: 80px;
+    }
+
+    .create-btn {
+        background-color: hsl(16, 100%, 35%);
+
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 8px;
+        font-size: 15px;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .create-btn:hover {
+        background-color: hsl(16, 100%, 25%);
+
+        transform: translateY(-2px);
+    }

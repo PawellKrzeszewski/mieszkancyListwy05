@@ -1,5 +1,7 @@
 /* Imports start */
 @import url('../css/header.css');
+@import url('../css/chats.css');
+@import url('../css/contact.css');
 /* Imports end */
 
 /* normalization start */
@@ -159,8 +161,8 @@ main
   border-radius: 4px;
   transition: transform 0.3s ease;
 }
-.slide-btn.left { left: 0; transform: translateX(0); }
-.slide-btn.right { right: 0; transform: translateX(0); }
+.slide-btn.left {top:6rem; left: 2rem; transform: translateX(0); }
+.slide-btn.right {top:6rem; right: 2rem; transform: translateX(0); }
 
 #container
 {
@@ -214,4 +216,12 @@ main
 {
     display: flex;
     justify-content: space-between;
+}
+
+.toggle-left-closed {
+  left: 0rem;
+}
+
+.toggle-left-open {
+  left: 2rem;
 }
