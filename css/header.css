@@ -3,7 +3,7 @@ header
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 1rem 2rem 6rem;
+    margin: 1rem 2rem 2rem;
     padding: 1rem 2rem;
     background-color: hsl(16, 100%, 38%);
     color: hsl(0, 0%, 95%);
@@ -53,7 +53,7 @@ a:hover, #settings:hover
 {
     letter-spacing: 1px;
     font-weight: bold;
-    background-color: rgb(84, 84, 84);
+    background-color: #202020;
     border-radius: .5rem;
 }
 

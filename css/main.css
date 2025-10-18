@@ -150,10 +150,18 @@ main
   transform: translateX(0);
 }
 
+#connnector
+{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 2.1rem 2rem;
+}
+
+
 /* Przyciski otwierające panele */
 .slide-btn {
-  position: fixed;
-  top: 80px; /* nieco niżej niż panel, bardziej estetycznie */
+  /* position: fixed; */
+  top: 80px;
   z-index: 1010;
   padding: 10px 15px;
   background: #333;
@@ -182,6 +190,11 @@ main
   padding: 10px 15px;
   margin-bottom: 15px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  cursor: pointer;
+
+  &:hover{
+      background: #b7a7a7;
+  }
 }
 
 .alert h3 {

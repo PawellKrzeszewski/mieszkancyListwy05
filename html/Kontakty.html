@@ -19,7 +19,7 @@
         <nav>
             <ul>
                 <li><a href="./GrupaRowerowa.html">CHATS</a></li>
-                <li><a href="./Kontakty.html">CONTACTT</a></li>
+                <li><a href="./Kontakty.html">CONTACT</a></li>
             </ul>
         </nav>
 
@@ -28,7 +28,10 @@
         </div>
 
     </header>
-
+    <div id="connnector">
+      <button id="toggleLeft" class="slide-btn left">Alerty  ☰</button>
+      <button id="toggleRight" class="slide-btn right">☰ Wydarzenia</button>
+    </div>
   <div class="containerr">
     <h2>Zgłoszenie rowerowe</h2>
     <form id="reportForm">
@@ -48,7 +51,145 @@
     </ul>
   </div>
 </div>
+
+<div id="leftPanel" class="side-panel left">
+  <h2 class="white">Alerty</h2>
+
+
+  <div>
+     <section class="alert">
+    <h3>🚧 Złamane drzewo na trasie</h3>
+    <p>Na odcinku ścieżki przy ul. Parowej przewróciło się drzewo. Przejazd utrudniony.</p>
+    <small>Ostatnia aktualizacja: 18.10.2025</small>
+  </section>
+
+  <section class="alert">
+    <h3>💧 Błoto po ulewie</h3>
+    <p>Trasa leśna w okolicy Borowic jest silnie zabłocona po ostatnich opadach deszczu.</p>
+    <small>Ostatnia aktualizacja: 18.10.2025</small>
+  </section>
+
+  <section class="alert">
+    <h3>🔧 Prace konserwacyjne</h3>
+    <p>Na ścieżce wzdłuż Wisły prowadzone są roboty związane z naprawą nawierzchni asfaltowej.</p>
+    <small>Ostatnia aktualizacja: 17.10.2025</small>
+  </section>
+
+  <section class="alert">
+    <h3>⚠️ Szkło na ścieżce</h3>
+    <p>W rejonie Mostu Solidarności zgłoszono potłuczone szkło — zachowaj ostrożność.</p>
+    <small>Ostatnia aktualizacja: 17.10.2025</small>
+  </section>
+
+  <section class="alert">
+    <h3>🐕 Luźno biegające psy</h3>
+    <p>Na trasie przez las Brwileński zauważono bezpańskie psy. Zalecana ostrożność.</p>
+    <small>Ostatnia aktualizacja: 16.10.2025</small>
+  </section>
+  </div>
+
+
+</div>
+
+<div id="rightPanel" class="side-panel right">
+  <h2 class="white">Wydarzenia</h2>
+
+
+  <div>
+    <div id="groupContainer">
+            <div class="group-card">
+                <div class="group-header">
+                    <div class="group-info">
+                        <div class="group-avatar"></div>
+                        <div class="group-text">
+                            <strong>Górska Ekipa</strong>
+                            Ilość uczestników: 12<br>
+                            Data: 10.06.2025 – 15.06.2025
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="group-details">
+                    <p><strong>Trasa i cel:</strong> Wyprawa wzdłuż szlaku beskidzkiego, noclegi pod namiotem.</p>
+                    <span class="join">Dołącz +</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="group-card">
+        <div class="group-header">
+            <div class="group-info">
+                <div class="group-avatar"></div>
+                <div class="group-text">
+                    <strong>Szlak Leśny MTB</strong>
+                    Ilość uczestników: 15<br>
+                    Data: 05.07.2025 – 06.07.2025
+                </div>
+            </div>
+        </div>
+        <div class="group-details">
+            <p><strong>Trasa i cel:</strong> Rajd rowerami górskimi po leśnych szlakach, nauka technik jazdy i cross-country.</p>
+            <span class="join">Dołącz +</span>
+        </div>
+    </div>
+
+    <!-- Wydarzenie 3 -->
+    <div class="group-card">
+        <div class="group-header">
+            <div class="group-info">
+                <div class="group-avatar"></div>
+                <div class="group-text">
+                    <strong>Rowerem po Mazurach</strong>
+                    Ilość uczestników: 10<br>
+                    Data: 15.07.2025 – 20.07.2025
+                </div>
+            </div>
+        </div>
+        <div class="group-details">
+            <p><strong>Trasa i cel:</strong> Wielodniowa wyprawa rowerowa po Mazurach, z noclegami w pensjonatach i zwiedzaniem jezior.</p>
+            <span class="join">Dołącz +</span>
+        </div>
+    </div>
+
+    <!-- Wydarzenie 4 -->
+    <div class="group-card">
+        <div class="group-header">
+            <div class="group-info">
+                <div class="group-avatar"></div>
+                <div class="group-text">
+                    <strong>Nocny Rajd Miejski</strong>
+                    Ilość uczestników: 18<br>
+                    Data: 12.08.2025
+                </div>
+            </div>
+        </div>
+        <div class="group-details">
+            <p><strong>Trasa i cel:</strong> Wieczorny rajd rowerowy po mieście, zwiedzanie oświetlonych atrakcji i wspólne ognisko na zakończenie.</p>
+            <span class="join">Dołącz +</span>
+        </div>
+    </div>
+  </div>
+
+
+</div>
+
   <script>
+
+const leftPanel = document.getElementById('leftPanel');
+const rightPanel = document.getElementById('rightPanel');
+const toggleLeft = document.getElementById('toggleLeft');
+const toggleRight = document.getElementById('toggleRight');
+
+toggleLeft.onclick = () => {
+  leftPanel.classList.toggle('active');
+  toggleLeft.style.transform = leftPanel.classList.contains('active') ? 'translateX(400px)' : 'translateX(0)';
+};
+
+toggleRight.onclick = () => {
+  rightPanel.classList.toggle('active');
+  toggleRight.style.transform = rightPanel.classList.contains('active') ? 'translateX(-400px)' : 'translateX(0)';
+};
+
     document.getElementById("reportForm").addEventListener("submit", function (e) {
       e.preventDefault();
       const message = document.getElementById("message").value.trim();
