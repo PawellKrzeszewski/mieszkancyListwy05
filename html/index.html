@@ -10,25 +10,32 @@
 </head>
 
 <body>
-  <header>
+    <header>
+        <div>
+            <div id="logo">
+                <a href="./index.html"><img src="" alt="logo"></a>
+            </div>
+
+            <div><a href="./index.html">SUMP — Płock</a></div>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="./GrupaRowerowa.html">CHATS</a></li>
+                <li><a href="./Kontakty.html">CONTACT</a></li>
+            </ul>
+        </nav>
+
+        <div id="settings">
+            <i class="fa-solid fa-gear"></i>
+        </div>
+
+    </header>
+
     <div>
-      <div id="logo">
-        <a href="./index.html"><img src="" alt="logo"></a>
-      </div>
-      <div><a href="./index.html">nazwa aplikacji</a></div>
+      <button id="toggleLeft" class="slide-btn left">☰ Lewy panel</button>
+      <button id="toggleRight" class="slide-btn right">☰ Prawy panel</button>
     </div>
-
-    <nav>
-      <ul>
-        <li><a href="#">CHATS</a></li>
-        <li><a href="#">CONTACT</a></li>
-      </ul>
-    </nav>
-
-    <div id="settings">
-      <i class="fa-solid fa-gear"></i>
-    </div>
-  </header>
 
   <main>
     <section>
@@ -41,31 +48,101 @@
         </ul>
       </div>
       <div id="map"></div>
+
+      <div id="panel">
+          <div id="con">
+            <h2 id="h2">Filtry tras </h2>
+            <span id="colapse">—</span>
+          
+          </div>
+
+        <div id="clear">
+          
+          <label><input type="checkbox" id="filter-family"/> Trasy rodzinne</label>
+          <br>
+          <label><input type="checkbox" id="filter-sport"/> Trasy sportowe</label>
+
+          <hr/>
+          <br>
+
+          <label><input type="checkbox" id="show-pois" checked/> Pokaż miejsca odpoczynku</label>
+          <br>
+          <label><input type="checkbox" id="show-stations" checked/> Pokaż stacje roweru miejskiego</label>
+        </div>
+      </div>
     </section>
+<!-- 
+    <div id="container">
+      <div id="panel" >
+        <div>
+          <h4>Filtry tras</h4>
+          
+          <label><input type="checkbox" id="filter-family"/> Trasy rodzinne</label>
+          <label><input type="checkbox" id="filter-sport"/> Trasy sportowe</label>
+
+          <hr/>
+
+          <label><input type="checkbox" id="show-pois" checked/> Pokaż miejsca odpoczynku</label>
+          <label><input type="checkbox" id="show-stations" checked/> Pokaż stacje roweru miejskiego</label>
+        </div>
+      </div>
+    </div> -->
+
   </main>
 
-  <!-- panel filtrów z mapa_final -->
-  <aside id="panel" style="
-      position:absolute;
-      left:20px;
-      top:110px;
-      z-index:1000;
-      background:rgba(255,255,255,0.95);
-      padding:10px 14px;
-      border-radius:6px;
-      box-shadow:0 2px 6px rgba(0,0,0,0.25);
-      font-size:15px;">
-    <h4>Filtry tras</h4>
-    <label><input type="checkbox" id="filter-family"/> Trasy rodzinne</label>
-    <label><input type="checkbox" id="filter-sport"/> Trasy sportowe</label>
-    <hr/>
-    <label><input type="checkbox" id="show-pois" checked/> Pokaż miejsca odpoczynku</label>
-    <label><input type="checkbox" id="show-stations" checked/> Pokaż stacje roweru miejskiego</label>
-  </aside>
+    <nav>
+      <ul>
+        <li><a href="#">CHATS</a></li>
+        <li><a href="#">CONTACT</a></li>
+      </ul>
+    </nav>
+
 
   <!-- Leaflet + skrypt mapy -->
   <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
   <script src="https://unpkg.com/@mapbox/togeojson@0.16.0/dist/togeojson.js"></script>
-  <script src="script.js"></script>
+  <script src="../scripts/script.js"></script>
+
+
+
+<!-- Przyciski otwierające panele -->
+
+
+<!-- Panele wysuwane -->
+<div id="leftPanel" class="side-panel left">
+  <h2>Lewa zawartość</h2>
+  <p>Tu możesz dodać np. listę tras rowerowych lub ustawienia.</p>
+</div>
+
+<div id="rightPanel" class="side-panel right">
+  <h2>Prawa zawartość</h2>
+  <p>Tu możesz dodać np. punkty POI, statystyki itp.</p>
+</div>
+
+<script>
+const leftPanel = document.getElementById('leftPanel');
+const rightPanel = document.getElementById('rightPanel');
+const toggleLeft = document.getElementById('toggleLeft');
+const toggleRight = document.getElementById('toggleRight');
+
+toggleLeft.onclick = () => {
+  leftPanel.classList.toggle('active');
+  toggleLeft.style.transform = leftPanel.classList.contains('active') ? 'translateX(300px)' : 'translateX(0)';
+};
+
+toggleRight.onclick = () => {
+  rightPanel.classList.toggle('active');
+  toggleRight.style.transform = rightPanel.classList.contains('active') ? 'translateX(-300px)' : 'translateX(0)';
+};
+
+
+
+
+    
+
+
+</script>
+
 </body>
+
 </html>

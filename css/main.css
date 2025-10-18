@@ -1,5 +1,7 @@
 /* Imports start */
 @import url('../css/header.css');
+@import url('../css/chats.css');
+@import url('../css/contact.css');
 /* Imports end */
 
 /* normalization start */
@@ -31,6 +33,7 @@ a
 }
 
 ul{list-style: none;}
+
 
 /* normalization end */
 
@@ -64,7 +67,7 @@ main
         justify-content: space-around;
         margin: 0 2rem 4rem;
 
-        &> div
+        &> div:first-child
         {
             background-color: #202020;
             margin-right: 8rem;
@@ -76,6 +79,8 @@ main
             & h1
             {
                 margin-bottom: 2rem;
+                letter-spacing: 2px;
+                word-spacing: 2px;
             }
 
             & ul
@@ -109,10 +114,6 @@ main
         }
     }
 
-    & section:last-child
-    {
-        height: 40vh;
-    }
 }
 
 
@@ -161,5 +162,67 @@ main
   border-radius: 4px;
   transition: transform 0.3s ease;
 }
-.slide-btn.left { left: 0; transform: translateX(0); }
-.slide-btn.right { right: 0; transform: translateX(0); }
+.slide-btn.left {top:6rem; left: 2rem; transform: translateX(0); }
+.slide-btn.right {top:6rem; right: 2rem; transform: translateX(0); }
+
+#container
+{
+    display: flex;
+    justify-content: end;
+}
+
+#panel
+{
+    position: relative;
+    margin-left: 2rem;
+    width: 28%;
+    font-size: 1.125rem;
+    height: 20rem;
+    z-index:1000;
+    background: #202020;
+    padding:10px 14px;
+    border-radius:6px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.25);
+    transition: 1s;
+    display: block;
+
+    & h2
+    {
+        margin-bottom: 1rem;
+    }
+
+    & input, label{cursor: pointer;}
+
+    & label
+    {
+        width: 100%;
+    }
+
+    & input
+    {
+        margin-bottom: 1rem;
+    }
+}
+
+#colapse
+{
+    cursor: pointer;
+    font-size: 1.5rem;
+    /* position: absolute;
+    top: .5rem;
+    right: 2rem; */
+}
+
+#con
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.toggle-left-closed {
+  left: 0rem;
+}
+
+.toggle-left-open {
+  left: 2rem;
+}
