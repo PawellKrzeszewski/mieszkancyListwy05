@@ -39,3 +39,49 @@ ul{list-style: none;}
 
 
 /* main css end */
+/* wspólne style dla paneli */
+.side-panel {
+  position: fixed;
+  top: 0;
+  width: 300px;
+  height: 100%;
+  background: #fff;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+  padding: 20px;
+  overflow-y: auto;
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+/* Lewy panel - start poza ekranem */
+.side-panel.left {
+  left: 0;
+  transform: translateX(-100%);
+}
+
+/* Prawy panel - start poza ekranem */
+.side-panel.right {
+  right: 0;
+  transform: translateX(100%);
+}
+
+/* Klasa aktywna - panel wysunięty */
+.side-panel.active {
+  transform: translateX(0);
+}
+
+/* Przyciski otwierające panele */
+.slide-btn {
+  position: fixed;
+  top: 20px;
+  z-index: 1100;
+  padding: 10px 15px;
+  background: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: transform 0.3s ease;
+}
+.slide-btn.left { left: 0; transform: translateX(0); }
+.slide-btn.right { right: 0; transform: translateX(0); }
