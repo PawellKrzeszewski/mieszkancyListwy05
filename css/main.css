@@ -12,6 +12,11 @@
     font-family: Arial;
 }
 
+body
+{
+    background-color: hsl(0, 0%, 85%);
+}
+
 a, i
 {
     cursor: pointer;
@@ -22,8 +27,7 @@ a
 {
     width: 100%;
     text-decoration: none;
-    color: white;
-    padding: .5rem 1rem;
+    color: hsl(0, 0%, 95%);
 }
 
 ul{list-style: none;}
@@ -34,8 +38,77 @@ ul{list-style: none;}
 
 /* main css start */
 
-#map { height: calc(100vh - 64px); } /* mapa zajmuje prawie cały ekran */
 
+#map
+{
+    width: 80%;
+    height: 70vh;
+    border-radius: 1rem;
+    border: 1px solid black;
+    box-shadow: 5rem 2rem white;
+    margin-bottom: 2rem;
+}
+
+main
+{
+    color: hsl(0, 0%, 95%);
+    background-color: hsl(16, 100%, 38%);
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+    padding: 2rem 0;
+    margin: 0 2rem;
+
+    & section
+    {
+        display: flex;
+        justify-content: space-around;
+        margin: 0 2rem;
+
+        &> div
+        {
+            background-color: #202020;
+            margin-right: 8rem;
+            padding: 2rem 3rem;
+            border-radius: 2rem;
+            height: 100%;
+            width: 50%;
+            
+            & h1
+            {
+                margin-bottom: 2rem;
+            }
+
+            & ul
+            {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            
+            & li
+            {
+                padding: 1rem 2rem;
+                margin-bottom: 3.5rem;
+                border-radius: 1rem;
+                font-size: 1.25rem;
+                letter-spacing: 2px;
+                word-spacing: 5px;
+                line-height: 2rem;
+                z-index: 100;
+                transition: .5s;
+                border-left: 1px solid white;
+                border-right: 1px solid white;
+            }
+
+            & li:hover
+            {
+                background-color: hsl(0, 0%, 85%);
+                color: #202020;
+                font-weight: bold;
+            }
+        }
+    }
+}
 
 
 /* main css end */

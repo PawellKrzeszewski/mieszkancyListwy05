@@ -30,25 +30,31 @@
         </div>
 
     </header>
-    
-    <main>
 
+    <main>
+      <section>
+        <div>
+          <h1>ZNAJDŹ ŚCIEŻKI ROWEROWE!!!</h1>
+          <ul>
+            <li>Wyszukuj i odkrywaj najlepsze trasy rowerowe w Twojej okolicy!</li>
+            <li>Sprawdź, gdzie możesz wybrać się na rower – w mieście, lesie czy nad rzeką!</li>
+            <li>Przesuń mapę, powiększ i znajdź idealną trasę na dzisiejszą przejażdżkę</li>
+          </ul>
+        </div>
+
+
+        <div id="map"></div>
+      </section>
     </main>
 
-    <footer>
+    <!-- <section>
+      <strong>Mapa tras rowerowych — Płock (prosty)</strong>
+      <div class="controls">
+        <label>Wczytaj GPX: <input id="gpxfile" type="file" accept=".gpx" /></label>
+        <button id="toggleCyclo">Przełącz CyclOSM</button>
+      </div>
+    </section> -->
 
-    </footer>
-  <section>
-    <strong>Mapa tras rowerowych — Płock (prosty)</strong>
-    <div class="controls">
-      <!-- przycisk do wczytania GPX -->
-      <label>Wczytaj GPX: <input id="gpxfile" type="file" accept=".gpx" /></label>
-      <!-- prosty przycisk do przełączenia mapy CyclOSM -->
-      <button id="toggleCyclo">Przełącz CyclOSM</button>
-    </div>
-  </section>
-
-  <div id="map"></div>
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
