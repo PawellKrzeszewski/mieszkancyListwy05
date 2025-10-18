@@ -95,7 +95,7 @@ main
                 padding: 1rem 2rem;
                 margin-bottom: 3.5rem;
                 border-radius: 1rem;
-                font-size: 1.25rem;
+                font-size: 1.4rem;
                 letter-spacing: 2px;
                 word-spacing: 5px;
                 line-height: 2rem;
@@ -162,7 +162,7 @@ main
   cursor: pointer;
   border-radius: 4px;
   transition: transform 0.3s ease;
-  font-size: 16px;
+  font-size: 1.25rem;
 }
 
 /* Lewy przycisk */
@@ -234,6 +234,7 @@ main
     & label
     {
         width: 100%;
+        font-size: 1.4rem
     }
 
     & input
