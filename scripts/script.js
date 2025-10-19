@@ -129,21 +129,24 @@ document.getElementById('show-stations')?.addEventListener('change', e => {
 // === panel boczny ===
 const btn = document.querySelector("#colapse");
 const panel = document.querySelector("#panel");
-const clear = document.querySelector("#clear");
+const mapper = document.querySelector("#mapper");
 const h2 = document.querySelector("#h2");
+const clear = document.querySelector("#clear"); // Dodane
 
 if (btn && panel) {
   let isOpen = true;
   btn.addEventListener("click", () => {
     if (isOpen) {
-      panel.style.width = "3%";
-      if (clear) clear.style.display = "none";
+      panel.style.width = "4%";
+      if (clear) clear.style.display = "none"; // Sprawdzenie, czy clear istnieje
       if (h2) h2.style.display = "none";
+      if (mapper) mapper.style.width = "100%";
       btn.innerHTML = "+";
     } else {
       panel.style.width = "28%";
       if (clear) clear.style.display = "block";
       if (h2) h2.style.display = "block";
+      if (mapper) mapper.style.width = "80%";
       btn.innerHTML = "—";
     }
     isOpen = !isOpen;
@@ -162,9 +165,6 @@ legend.onAdd = function () {
   div.innerHTML = `
         <h4 id="legenda"style="text-align:center">Legenda <span id="clearer">—</span></h4>
     <div id="warper">
-      <div><span style="background:#1a9850"></span> Trasa rodzinna</div>
-      <div><span style="background:#2b83ba"></span> Droga rowerowa</div>
-      <div><span style="background:#d73027"></span> Trasa sportowa</div>
       <div><img src="https://cdn-icons-png.flaticon.com/512/2972/2972185.png" style="width:20px;height:20px;vertical-align:middle;margin-right:6px;"> Stacja roweru</div>
       <div><img src="../imgs/bench.png" style="width:20px;height:20px;vertical-align:middle;margin-right:6px;"> Ławka / odpoczynek</div>
     </div
@@ -172,6 +172,33 @@ legend.onAdd = function () {
   return div;
 };
 legend.addTo(map);
+
+let clearer = document.querySelector("#clearer");
+let maplegend = document.querySelector(".map-legend");
+let legenda = document.querySelector("#legenda");
+let warper = document.querySelector("#warper");
+let isOpenTwo = true;
+
+clearer.style.cursor = "pointer";
+
+clearer.addEventListener("click", () =>
+{
+  if(isOpenTwo)
+  {
+    clearer.innerHTML = "+";
+    warper.style.display = "none"
+    maplegend.style.height = "4rem";
+  }
+  else
+    {
+    clearer.innerHTML = "—";
+    warper.style.display = "block"
+    maplegend.style.height = "100px";
+  }
+  isOpenTwo = !isOpenTwo;
+})  
+
+
 
 // === DOKŁADNE ŚLEDZENIE GPS ===
 let gpsWatchId = null;

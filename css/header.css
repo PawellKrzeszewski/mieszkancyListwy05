@@ -1,4 +1,4 @@
-{
+header{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -33,10 +33,6 @@ nav
         width: 5rem;
     }
 
-    & li:first-child, li:nth-child(2)
-    {
-        margin-right: 2rem;
-    }
     }
 }
 
