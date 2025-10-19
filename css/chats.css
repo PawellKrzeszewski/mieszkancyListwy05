@@ -109,6 +109,10 @@
     font-size: 1.5rem;
 
 }
+.pinezka-ui img {
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0,0,0,0.4);
+}
 
 #groupImage
 {
@@ -151,4 +155,50 @@
 
 .create-btn:hover {
     background-color: #404040;
+}
+
+.legenda {
+  background: white;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  line-height: 1.4em;
+  color: #333;
+}
+
+.legenda h4 {
+  margin: 0 0 5px 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* --- Pinezka UI --- */
+.pinezka-ui img {
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0,0,0,0.4);
+  margin: 6px;
+}
+.my-location-btn {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background-color: white;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1000;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.my-location-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.my-location-btn img {
+  width: 28px;
+  height: 28px;
 }

@@ -169,8 +169,26 @@ legend.onAdd = function () {
       <div><img src="../imgs/bench.png" style="width:20px;height:20px;vertical-align:middle;margin-right:6px;"> Ławka / odpoczynek</div>
     </div
   `;
+  return div;
+};
 
 legend.addTo(map);
+
+
+const legend2 = L.control({ position: 'bottomleft' });
+legend2.onAdd = function () {
+  const div = L.DomUtil.create('div', 'centerMap');
+  div.style.backgroundColor = "rgb(255,255,255,0.8)";
+  div.style.borderRadius = "50px";
+  div.style.padding = "10px"
+  div.innerHTML = `
+        <img style="height:80px" id="centerMap" src="../imgs/pinezka.png">
+  `;
+  return div;
+};
+legend2.addTo(map);
+
+
 
 // === DOKŁADNE ŚLEDZENIE GPS ===
 let gpsWatchId = null;
@@ -284,5 +302,4 @@ console.log("✅ Skrypt mapy wczytany poprawnie");
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('../scripts/sw.js');
-}
 }
