@@ -1,4 +1,55 @@
 {
   "type": "FeatureCollection",
-  "features": []
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [19.67, 52.5465] },
+      "properties": { "typ": "Ławka", "name": "Ławka przy rzece" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [19.708, 52.554] },
+      "properties": { "typ": "Ławka", "name": "Ławka przy torach" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [19.693, 52.541] },
+      "properties": { "typ": "Ławka", "name": "Ławka w parku" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [19.6877, 52.5587] },
+      "properties": { "typ": "Ławka", "name": "Ławka przy kościele" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [19.6854, 52.5525] },
+      "properties": { "typ": "Ławka", "name": "Ławka w parku" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [19.6996, 52.551] },
+      "properties": { "typ": "Ławka", "name": "Ławka przy wejściu na stadion" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [19.6893, 52.5473]},
+      "properties": { "typ": "Ławka", "name": "Ławka przy lewiatanie" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [19.6754, 52.557]},
+      "properties": { "typ": "Ławka", "name": "Ławka na wejściu do szkoły" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [19.708, 52.541]},
+      "properties": { "typ": "Ławka", "name": "Ławka przy zoolandii i mini parku" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [19.711, 52.5455]},
+      "properties": { "typ": "Ławka", "name": "Ławka przy stacji paliw" }
+    }
+  ]
 }

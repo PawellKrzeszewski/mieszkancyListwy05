@@ -9,17 +9,18 @@
   <script src="https://kit.fontawesome.com/8164e1f9c8.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header>
+    <header class="szklo">
         <div>
             <div id="logo">
-                <a href="./index.html"><img src="" alt="logo"></a>
+                <a href="./index.html"><i class="fa-solid fa-bicycle"></i></a>
             </div>
 
-            <div><a href="./index.html">SUMP — Płock</a></div>
+            <!-- <div><a href="./index.html">SUMP — Płock</a></div> -->
         </div>
 
         <nav>
             <ul>
+                <li><a href="./index.html">HOME</a></li>
                 <li><a href="./GrupaRowerowa.html">CHATS</a></li>
                 <li><a href="./Kontakty.html">CONTACT</a></li>
             </ul>
@@ -31,14 +32,14 @@
 
     </header>
 
-    <div>
+    <div id="connnector">
       <button id="toggleLeft" class="slide-btn left">Alerty  ☰</button>
       <button id="toggleRight" class="slide-btn right">☰ Wydarzenia</button>
     </div>
 
-  <main>
+  <main class="">
     <section>
-      <div id="left">
+      <div class="szklo">
         <h1>ZNAJDŹ ŚCIEŻKI ROWEROWE!!!</h1>
         <ul>
           <li>Wyszukuj i odkrywaj najlepsze trasy rowerowe w Twojej okolicy!</li>
@@ -46,29 +47,34 @@
           <li>Przesuń mapę, powiększ i znajdź idealną trasę na dzisiejszą przejażdżkę</li>
         </ul>
       </div>
-      <div id="map"></div>
 
-      <div id="panel">
-          <div id="con">
-            <h2 id="h2">Filtry tras </h2>
-            <span id="colapse">—</span>
-          
+      <div id="conn" class="szklo">
+      
+        <div id="map" class="szklo"></div>
+
+        <div id="panel">
+            <div id="con">
+              <h2 id="h2">Filtry tras </h2>
+              <span id="colapse">—</span>
+            
+            </div>
+
+          <div id="clear">
+            
+            <label><input type="checkbox" id="filter-family"/> Trasy rodzinne</label>
+            <br>
+            <label><input type="checkbox" id="filter-sport"/> Trasy sportowe</label>
+
+            <hr/>
+            <br>
+
+            <label><input type="checkbox" id="show-pois" checked/> Pokaż miejsca odpoczynku</label>
+            <br>
+            <label><input type="checkbox" id="show-stations" checked/> Pokaż stacje roweru miejskiego</label>
           </div>
-
-        <div id="clear">
-          
-          <label><input type="checkbox" id="filter-family"/> Trasy rodzinne</label>
-          <br>
-          <label><input type="checkbox" id="filter-sport"/> Trasy sportowe</label>
-
-          <hr/>
-          <br>
-
-          <label><input type="checkbox" id="show-pois" checked/> Pokaż miejsca odpoczynku</label>
-          <br>
-          <label><input type="checkbox" id="show-stations" checked/> Pokaż stacje roweru miejskiego</label>
         </div>
       </div>
+
     </section>
 <!-- 
     <div id="container">
@@ -233,7 +239,6 @@
 </div>
 
 
-
 <script>
 const leftPanel = document.getElementById('leftPanel');
 const rightPanel = document.getElementById('rightPanel');
@@ -242,12 +247,12 @@ const toggleRight = document.getElementById('toggleRight');
 
 toggleLeft.onclick = () => {
   leftPanel.classList.toggle('active');
-  toggleLeft.style.transform = leftPanel.classList.contains('active') ? 'translateX(400px)' : 'translateX(0)';
+  toggleLeft.style.transform = leftPanel.classList.contains('active') ? 'translateX(28.5rem)' : 'translateX(0)';
 };
 
 toggleRight.onclick = () => {
   rightPanel.classList.toggle('active');
-  toggleRight.style.transform = rightPanel.classList.contains('active') ? 'translateX(-400px)' : 'translateX(0)';
+  toggleRight.style.transform = rightPanel.classList.contains('active') ? 'translateX(-28.5rem)' : 'translateX(0)';
 };
 
 
