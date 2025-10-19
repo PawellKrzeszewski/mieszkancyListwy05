@@ -1,7 +1,7 @@
 /* Imports start */
 @import url('header.css');
-@import url('../css/chats.css');
-@import url('../css/contact.css');
+@import url('chats.css');
+@import url('contact.css');
 /* Imports end */
 
 /* normalization start */
@@ -479,3 +479,60 @@ a:hover, #settings:hover
 }
 
 
+/* === GPS CONTROLS === */
+#gps-controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 1rem 0;
+}
+
+#gps-controls button {
+  background-color: #179696;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  min-width: 120px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+}
+
+#gps-controls button:hover {
+  background-color: #0f6e6e;
+}
+
+/* === RESPONSYWNOŚĆ === */
+@media (max-width: 768px) {
+  body {
+    background-size: cover;
+    background-attachment: fixed;
+  }
+
+  header, main {
+    margin: 0;
+    padding: 0.5rem;
+  }
+
+  #map {
+    width: 100%;
+    height: 80vh;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  #gps-controls {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #gps-controls button {
+    width: 80%;
+    font-size: 1.2rem;
+    padding: 1rem;
+  }
+}

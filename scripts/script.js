@@ -16,25 +16,13 @@ function onEachTrasa(feature, layer) {
 }
 
 function styleTrasa(feature) {
-  // losowanie koloru wg prawdopodobieństwa
   const rand = Math.random();
-
-  // 5% szans – czerwony (duży ruch)
-  if (rand < 0.05) {
-    return { color: '#d73027', weight: 4 }; // czerwony
-  }
-
-  // 10% szans – pomarańczowy (umiarkowany ruch)
-  if (rand < 0.15) {
-    return { color: '#fdae61', weight: 4 }; // pomarańczowy
-  }
-
-  // reszta – odcienie zieleni
+  if (rand < 0.05) return { color: '#d73027', weight: 4 };
+  if (rand < 0.15) return { color: '#fdae61', weight: 4 };
   const greens = ['#006837', '#1a9850', '#31a354', '#66bd63', '#a6d96a'];
   const color = greens[Math.floor(Math.random() * greens.length)];
   return { color, weight: 4 };
 }
-
 
 // === ikony ===
 function createBikeIcon(size = 30) {
@@ -46,7 +34,6 @@ function createBikeIcon(size = 30) {
   });
 }
 
-// 🪑 ikona ławki
 function createBenchIcon(size = 30) {
   return L.icon({
     iconUrl: '../imgs/bench.png',
@@ -55,7 +42,6 @@ function createBenchIcon(size = 30) {
     popupAnchor: [0, -size / 2]
   });
 }
-
 
 function getBikeIconForZoom(zoom) {
   if (zoom < 10) return createBikeIcon(25);
@@ -67,18 +53,8 @@ function getBikeIconForZoom(zoom) {
 
 // === warstwy mapy ===
 let trasyLayer = L.geoJSON(null, { style: styleTrasa, onEachFeature: onEachTrasa }).addTo(map);
-
-// === warstwa ławek / POI ===
 let poisLayer = L.geoJSON(null, {
-  pointToLayer: (f, latlng) => {
-    const typ = (f.properties?.typ || '').toLowerCase();
-    // zawsze ławka — jeśli ma typ "ławka", "bench" lub brak typu (bo to i tak POI)
-    if (typ.includes('ławka') || typ.includes('bench') || !typ) {
-      return L.marker(latlng, { icon: createBenchIcon() });
-    }
-    // w przyszłości można dodać inne ikony dla różnych typów POI
-    return L.marker(latlng, { icon: createBenchIcon() });
-  },
+  pointToLayer: (f, latlng) => L.marker(latlng, { icon: createBenchIcon() }),
   onEachFeature: (f, l) => {
     let popup = '';
     if (f.properties?.name) popup += '<b>' + f.properties.name + '</b><br/>';
@@ -87,7 +63,6 @@ let poisLayer = L.geoJSON(null, {
   }
 }).addTo(map);
 
-// === warstwa stacji rowerowych ===
 let bikeIcon = getBikeIconForZoom(map.getZoom());
 let stationsLayer = L.geoJSON(null, {
   pointToLayer: (f, latlng) => L.marker(latlng, { icon: bikeIcon }),
@@ -99,7 +74,7 @@ let stationsLayer = L.geoJSON(null, {
   }
 }).addTo(map);
 
-// === aktualizacja rozmiaru rowerków przy zoomie ===
+// === aktualizacja rozmiaru rowerków ===
 map.on('zoomend', () => {
   const newIcon = getBikeIconForZoom(map.getZoom());
   stationsLayer.eachLayer(layer => {
@@ -107,13 +82,13 @@ map.on('zoomend', () => {
   });
 });
 
-// === filtrowanie tras z buforowaniem ===
+// === filtrowanie tras ===
 let allTrasy = null;
 
 function applyFilters() {
   if (!allTrasy) return;
-  const family = document.getElementById('filter-family').checked;
-  const sport = document.getElementById('filter-sport').checked;
+  const family = document.getElementById('filter-family')?.checked;
+  const sport = document.getElementById('filter-sport')?.checked;
 
   const feats = allTrasy.features.filter(f => {
     const typ = (f.properties?.typ || '').toLowerCase();
@@ -139,13 +114,14 @@ fetch('stations_wgs84.geojson').then(r => r.ok ? r.json() : null).then(data => {
 
 // === eventy ===
 ['filter-family', 'filter-sport'].forEach(id => {
-  document.getElementById(id).addEventListener('change', applyFilters);
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('change', applyFilters);
 });
-document.getElementById('show-pois').addEventListener('change', e => {
+document.getElementById('show-pois')?.addEventListener('change', e => {
   if (e.target.checked) poisLayer.addTo(map);
   else map.removeLayer(poisLayer);
 });
-document.getElementById('show-stations').addEventListener('change', e => {
+document.getElementById('show-stations')?.addEventListener('change', e => {
   if (e.target.checked) stationsLayer.addTo(map);
   else map.removeLayer(stationsLayer);
 });
@@ -156,45 +132,152 @@ const panel = document.querySelector("#panel");
 const clear = document.querySelector("#clear");
 const h2 = document.querySelector("#h2");
 
-let isOpen = true;
-btn.addEventListener("click", () => {
-  if (isOpen) {
-    panel.style.width = "3%";
-    clear.style.display = "none";
-    h2.style.display = "none";
-    btn.innerHTML = "+";
-  } else {
-    panel.style.width = "28%";
-    clear.style.display = "block";
-    h2.style.display = "block";
-    btn.innerHTML = "—";
-    mapSite.style.width = "80%";
-  }
-  isOpen = !isOpen;
-});
+if (btn && panel) {
+  let isOpen = true;
+  btn.addEventListener("click", () => {
+    if (isOpen) {
+      panel.style.width = "3%";
+      if (clear) clear.style.display = "none";
+      if (h2) h2.style.display = "none";
+      btn.innerHTML = "+";
+    } else {
+      panel.style.width = "28%";
+      if (clear) clear.style.display = "block";
+      if (h2) h2.style.display = "block";
+      btn.innerHTML = "—";
+    }
+    isOpen = !isOpen;
+  });
+}
 
-// === legenda mapy ===
+// === legenda ===
 const legend = L.control({ position: 'bottomright' });
 legend.onAdd = function () {
   const div = L.DomUtil.create('div', 'map-legend');
-  div.style.backgroundColor = "rgb(0,0,0,0.85)";
+  div.style.backgroundColor = "rgba(0,0,0,0.85)";
   div.style.padding = "15px";
   div.style.borderRadius = "10px";
-  div.style.height = "200px";
-  div.style.width = "250px";
-  div.style.fontSize = "19px";
+  div.style.fontSize = "16px";
   div.style.color = "white";
   div.innerHTML = `
-    <h4 style="text-align:center">Legenda</h4>
-    <div><span style="background:#1a9850"></span> Trasa rodzinna</div>
-    <div><span style="background:#2b83ba"></span> Droga rowerowa</div>
-    <div><span style="background:#d73027"></span> Trasa sportowa</div>
-    <div><img src="https://cdn-icons-png.flaticon.com/512/2972/2972185.png" style="width:20px;height:20px;vertical-align:middle;margin-right:6px;"> Stacja roweru</div>
-    <div><img src="../imgs/bench.png" style="width:20px;height:20px;vertical-align:middle;margin-right:6px;"> Ławka / odpoczynek</div>
+    <h4 style="text-align:center;margin-bottom:8px;">Legenda</h4>
+    <div><img src="https://cdn-icons-png.flaticon.com/512/2972/2972185.png" style="width:20px;height:20px;margin-right:6px;"> Stacja roweru</div>
+    <div><img src="../imgs/bench.png" style="width:20px;height:20px;margin-right:6px;"> Ławka / odpoczynek</div>
   `;
   return div;
 };
 legend.addTo(map);
 
-// === inicjalizacja ===
-applyFilters();
+// === DOKŁADNE ŚLEDZENIE GPS ===
+let gpsWatchId = null;
+let gpsMarker = null;
+let gpsPath = [];
+let gpsPolyline = null;
+
+function startTracking() {
+  if (!navigator.geolocation) {
+    alert("Twoja przeglądarka nie obsługuje geolokalizacji.");
+    return;
+  }
+
+  document.getElementById('startTracking').disabled = true;
+  document.getElementById('stopTracking').disabled = false;
+
+  gpsWatchId = navigator.geolocation.watchPosition(
+    pos => {
+      const lat = pos.coords.latitude;
+      const lng = pos.coords.longitude;
+      const accuracy = pos.coords.accuracy;
+
+      if (!gpsMarker) {
+        gpsMarker = L.marker([lat, lng], {
+          icon: L.icon({
+            iconUrl: 'https://cdn-icons-png.flaticon.com/512/64/64113.png',
+            iconSize: [30, 30],
+            iconAnchor: [15, 15]
+          })
+        }).addTo(map);
+      } else {
+        gpsMarker.setLatLng([lat, lng]);
+      }
+
+      gpsPath.push([lat, lng]);
+      if (gpsPolyline) {
+        gpsPolyline.setLatLngs(gpsPath);
+      } else {
+        gpsPolyline = L.polyline(gpsPath, { color: "#179696", weight: 5 }).addTo(map);
+      }
+
+      if (gpsPath.length === 1) map.setView([lat, lng], 16);
+      console.log(`GPS: ${lat}, ${lng} (dokładność: ${accuracy} m)`);
+    },
+    err => {
+      console.error("Błąd geolokalizacji:", err);
+      alert("Nie udało się pobrać lokalizacji.");
+    },
+    { enableHighAccuracy: true, maximumAge: 0, timeout: 10000 }
+  );
+}
+
+function stopTracking() {
+  if (gpsWatchId !== null) {
+    navigator.geolocation.clearWatch(gpsWatchId);
+    gpsWatchId = null;
+  }
+  document.getElementById('startTracking').disabled = false;
+  document.getElementById('stopTracking').disabled = true;
+  alert("Śledzenie zatrzymane.");
+}
+
+function centerMap() {
+  if (gpsMarker) {
+    map.setView(gpsMarker.getLatLng(), 16);
+  } else {
+    // Jeśli nie ma markera — pobierz lokalizację jednorazowo
+    if (!navigator.geolocation) {
+      alert("Twoja przeglądarka nie obsługuje geolokalizacji.");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        const accuracy = pos.coords.accuracy;
+
+        // Dodaj marker tymczasowy
+        if (!gpsMarker) {
+          gpsMarker = L.marker([lat, lng], {
+            icon: L.icon({
+              iconUrl: 'https://cdn-icons-png.flaticon.com/512/64/64113.png',
+              iconSize: [30, 30],
+              iconAnchor: [15, 15]
+            })
+          }).addTo(map);
+        } else {
+          gpsMarker.setLatLng([lat, lng]);
+        }
+
+        map.setView([lat, lng], 16);
+        console.log(`📍 Pozycja użytkownika: ${lat}, ${lng} (dokładność: ${accuracy} m)`);
+      },
+      err => {
+        console.error("Błąd pobierania pozycji:", err);
+        alert("Nie udało się ustalić lokalizacji użytkownika.");
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+    );
+  }
+}
+
+
+// === przyciski ===
+document.getElementById('startTracking')?.addEventListener('click', startTracking);
+document.getElementById('stopTracking')?.addEventListener('click', stopTracking);
+document.getElementById('centerMap')?.addEventListener('click', centerMap);
+
+console.log("✅ Skrypt mapy wczytany poprawnie");
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('../scripts/sw.js');
+}

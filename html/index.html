@@ -5,6 +5,7 @@
   <title>Mapa tras rowerowych — prosty przykład</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="stylesheet" href="../css/main.css">
+  <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"/>
   <script src="https://kit.fontawesome.com/8164e1f9c8.js" crossorigin="anonymous"></script>
 </head>
@@ -97,11 +98,6 @@
 
 
 
-  <!-- Leaflet + skrypt mapy -->
-  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/@mapbox/togeojson@0.16.0/dist/togeojson.js"></script>
-  <script src="../scripts/script.js"></script>
-
 <div id="overlay">
   <div id="modal">
     <h2 class="white">Ustawienia</h2>
@@ -109,8 +105,13 @@
       <li>Profil</li>
       <li>Motyw strony</li>
       <hr>
-      <li>Lokalizacja GPX</li>
     </ul>
+    <div id="gps-controls">
+  <button id="startTracking">▶ Start śledzenia</button>
+  <button id="stopTracking" disabled>⏹ Stop</button>
+  <button id="centerMap">📍 Pokaż moją pozycję</button>
+</div>
+
   </div>
 </div>
 
@@ -271,6 +272,13 @@ const button = document.getElementById('settings');
       overlay.style.display = 'none';
     }
   });
+
+  
 </script>
+
+<!-- Leaflet + skrypt mapy -->
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/@mapbox/togeojson@0.16.0/dist/togeojson.js"></script>
+  <script src="../scripts/script.js"></script>
 </body>
 </html>
