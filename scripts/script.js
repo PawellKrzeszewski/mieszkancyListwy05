@@ -129,21 +129,24 @@ document.getElementById('show-stations')?.addEventListener('change', e => {
 // === panel boczny ===
 const btn = document.querySelector("#colapse");
 const panel = document.querySelector("#panel");
-const clear = document.querySelector("#clear");
+const mapper = document.querySelector("#mapper");
 const h2 = document.querySelector("#h2");
+const clear = document.querySelector("#clear"); // Dodane
 
 if (btn && panel) {
   let isOpen = true;
   btn.addEventListener("click", () => {
     if (isOpen) {
-      panel.style.width = "3%";
-      if (clear) clear.style.display = "none";
+      panel.style.width = "4%";
+      if (clear) clear.style.display = "none"; // Sprawdzenie, czy clear istnieje
       if (h2) h2.style.display = "none";
+      if (mapper) mapper.style.width = "100%";
       btn.innerHTML = "+";
     } else {
       panel.style.width = "28%";
       if (clear) clear.style.display = "block";
       if (h2) h2.style.display = "block";
+      if (mapper) mapper.style.width = "80%";
       btn.innerHTML = "—";
     }
     isOpen = !isOpen;
@@ -160,9 +163,11 @@ legend.onAdd = function () {
   div.style.fontSize = "16px";
   div.style.color = "white";
   div.innerHTML = `
-    <h4 style="text-align:center;margin-bottom:8px;">Legenda</h4>
-    <div><img src="https://cdn-icons-png.flaticon.com/512/2972/2972185.png" style="width:20px;height:20px;margin-right:6px;"> Stacja roweru</div>
-    <div><img src="../imgs/bench.png" style="width:20px;height:20px;margin-right:6px;"> Ławka / odpoczynek</div>
+        <h4 id="legenda"style="text-align:center">Legenda <span id="clearer">—</span></h4>
+    <div id="warper">
+      <div><img src="https://cdn-icons-png.flaticon.com/512/2972/2972185.png" style="width:20px;height:20px;vertical-align:middle;margin-right:6px;"> Stacja roweru</div>
+      <div><img src="../imgs/bench.png" style="width:20px;height:20px;vertical-align:middle;margin-right:6px;"> Ławka / odpoczynek</div>
+    </div
   `;
   return div;
 };

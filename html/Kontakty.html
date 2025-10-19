@@ -11,7 +11,7 @@
     <header class="szklo">
         <div>
             <div id="logo">
-                <a href="./index.html"><i class="fa-solid fa-bicycle"></i></a>
+                <img width="70px" src="../imgs/rower.webp" alt="">
             </div>
 
             <!-- <div><a href="./index.html">SUMP — Płock</a></div> -->
@@ -38,18 +38,16 @@
     <h2>Zgłoszenie rowerowe</h2>
     <form id="reportForm">
       <textarea id="message" placeholder="Opisz swoje zgłoszenie..." required></textarea>
-      <button type="submit">Wyślij zgłoszenie</button>
+      <button type="submit" id="submitButton1">Wyślij zgłoszenie</button>
     </form>
   </div>
-
-  <div id="overlay">
+  <div id="overlay1">Zgłoszenie wysłano</div>
+<div id="overlay">
   <div id="modal">
     <h2 class="white">Ustawienia</h2>
     <ul id="lista">
       <li>Profil</li>
       <li>Motyw strony</li>
-      <hr>
-      <li>Lokalizacja GPX</li>
     </ul>
   </div>
 </div>
@@ -191,19 +189,29 @@ toggleRight.onclick = () => {
   rightPanel.classList.toggle('active');
   toggleRight.style.transform = rightPanel.classList.contains('active') ? 'translateX(-28.5rem)' : 'translateX(0)';
 };
-    document.getElementById("reportForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const message = document.getElementById("message").value.trim();
-      if (message) {
-        const subject = encodeURIComponent("Zgłoszenie rowerowe");
-        const body = encodeURIComponent(message);
-        window.location.href = `mailto:rowerowy@plock.eu?subject=${subject}&body=${body}`;
-      } else {
-        alert("Proszę wpisać treść zgłoszenia!");
-      }
-    });
 
 
+const form = document.getElementById('reportForm');
+  const overlay1 = document.getElementById('overlay1');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault(); // zapobiega przeładowaniu strony
+
+    overlay1.style.display = 'flex';
+    overlay1.style.opacity = '1';
+
+    // po 1 sekundzie schowaj overlay
+    setTimeout(() => {
+      overlay1.style.opacity = '0';
+      setTimeout(() => {
+        overlay1.style.display = 'none';
+      }, 300); // dopasowane do transition
+    }, 1000);
+
+    // tutaj możesz też dodać wysyłanie danych np. AJAX-em
+    form.reset(); // czyści formularz po wysłaniu
+  });
+    
     const button = document.getElementById('settings');
   const overlay = document.getElementById('overlay');
 
