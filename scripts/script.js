@@ -168,6 +168,7 @@ btn.addEventListener("click", () => {
     clear.style.display = "block";
     h2.style.display = "block";
     btn.innerHTML = "—";
+    mapSite.style.width = "80%";
   }
   isOpen = !isOpen;
 });
@@ -181,7 +182,8 @@ legend.onAdd = function () {
   div.style.borderRadius = "10px";
   div.style.height = "200px";
   div.style.width = "250px";
-  div.style.fontSize = "19px"
+  div.style.fontSize = "19px";
+  div.style.color = "white";
   div.innerHTML = `
     <h4 style="text-align:center">Legenda</h4>
     <div><span style="background:#1a9850"></span> Trasa rodzinna</div>
