@@ -141,6 +141,7 @@ main
   border-left: 5px solid #ff4d4d;
   border-radius: 6px;
   padding: 10px 15px;
+  font-size: 1.2rem;
   margin-bottom: 15px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   cursor: pointer;
@@ -152,7 +153,7 @@ main
 
 .alert h3 {
   margin: 0 0 5px 0;
-  font-size: 17px;
+  font-size: 1.5rem;
   color: #b30000;
 }
 #cnotainer1 {
@@ -160,7 +161,7 @@ main
 }
 .alert p {
   margin: 0;
-  font-size: 14px;
+  font-size: 1.3rem;
   color: #333;
 }
 #sraka
