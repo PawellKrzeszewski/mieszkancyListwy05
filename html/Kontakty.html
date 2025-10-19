@@ -7,17 +7,18 @@
   <title>Zgłoszenie rowerowe Płock</title>
 </head>
 <body>
-    <header>
+    <header class="szklo">
         <div>
             <div id="logo">
-                <a href="./index.html"><img src="" alt="logo"></a>
+                <a href="./index.html"><i class="fa-solid fa-bicycle"></i></a>
             </div>
 
-            <div><a href="./index.html">SUMP — Płock</a></div>
+            <!-- <div><a href="./index.html">SUMP — Płock</a></div> -->
         </div>
 
         <nav>
             <ul>
+                <li><a href="./index.html">HOME</a></li>
                 <li><a href="./GrupaRowerowa.html">CHATS</a></li>
                 <li><a href="./Kontakty.html">CONTACT</a></li>
             </ul>
@@ -182,14 +183,13 @@ const toggleRight = document.getElementById('toggleRight');
 
 toggleLeft.onclick = () => {
   leftPanel.classList.toggle('active');
-  toggleLeft.style.transform = leftPanel.classList.contains('active') ? 'translateX(400px)' : 'translateX(0)';
+  toggleLeft.style.transform = leftPanel.classList.contains('active') ? 'translateX(28.5rem)' : 'translateX(0)';
 };
 
 toggleRight.onclick = () => {
   rightPanel.classList.toggle('active');
-  toggleRight.style.transform = rightPanel.classList.contains('active') ? 'translateX(-400px)' : 'translateX(0)';
+  toggleRight.style.transform = rightPanel.classList.contains('active') ? 'translateX(-28.5rem)' : 'translateX(0)';
 };
-
     document.getElementById("reportForm").addEventListener("submit", function (e) {
       e.preventDefault();
       const message = document.getElementById("message").value.trim();

@@ -5,8 +5,8 @@ header
     align-items: center;
     margin: 1rem 2rem 2rem;
     padding: 1rem 2rem;
-    background-color: hsl(16, 100%, 38%);
-    color: hsl(0, 0%, 95%);
+    /* color: hsl(0, 0%, 95%); */
+    color: black;
     border-radius: .5rem;
     font-size: 1.5rem;
 
@@ -34,7 +34,7 @@ nav
         width: 5rem;
     }
 
-    & li:first-child
+    & li:first-child, li:nth-child(2)
     {
         margin-right: 2rem;
     }

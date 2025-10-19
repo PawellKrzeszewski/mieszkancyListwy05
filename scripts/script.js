@@ -156,18 +156,22 @@ const panel = document.querySelector("#panel");
 const clear = document.querySelector("#clear");
 const h2 = document.querySelector("#h2");
 
+const mapSite = document.querySelector('#map');
+
 let isOpen = true;
 btn.addEventListener("click", () => {
   if (isOpen) {
-    panel.style.width = "3%";
+    panel.style.width = "4%";
     clear.style.display = "none";
     h2.style.display = "none";
     btn.innerHTML = "+";
+    mapSite.style.width = "90%";
   } else {
     panel.style.width = "28%";
     clear.style.display = "block";
     h2.style.display = "block";
     btn.innerHTML = "—";
+    mapSite.style.width = "80%";
   }
   isOpen = !isOpen;
 });
@@ -181,7 +185,8 @@ legend.onAdd = function () {
   div.style.borderRadius = "10px";
   div.style.height = "200px";
   div.style.width = "250px";
-  div.style.fontSize = "19px"
+  div.style.fontSize = "19px";
+  div.style.color = "white";
   div.innerHTML = `
     <h4 style="text-align:center">Legenda</h4>
     <div><span style="background:#1a9850"></span> Trasa rodzinna</div>
