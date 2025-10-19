@@ -160,9 +160,14 @@ legend.onAdd = function () {
   div.style.fontSize = "16px";
   div.style.color = "white";
   div.innerHTML = `
-    <h4 style="text-align:center;margin-bottom:8px;">Legenda</h4>
-    <div><img src="https://cdn-icons-png.flaticon.com/512/2972/2972185.png" style="width:20px;height:20px;margin-right:6px;"> Stacja roweru</div>
-    <div><img src="../imgs/bench.png" style="width:20px;height:20px;margin-right:6px;"> Ławka / odpoczynek</div>
+        <h4 id="legenda"style="text-align:center">Legenda <span id="clearer">—</span></h4>
+    <div id="warper">
+      <div><span style="background:#1a9850"></span> Trasa rodzinna</div>
+      <div><span style="background:#2b83ba"></span> Droga rowerowa</div>
+      <div><span style="background:#d73027"></span> Trasa sportowa</div>
+      <div><img src="https://cdn-icons-png.flaticon.com/512/2972/2972185.png" style="width:20px;height:20px;vertical-align:middle;margin-right:6px;"> Stacja roweru</div>
+      <div><img src="../imgs/bench.png" style="width:20px;height:20px;vertical-align:middle;margin-right:6px;"> Ławka / odpoczynek</div>
+    </div
   `;
   return div;
 };

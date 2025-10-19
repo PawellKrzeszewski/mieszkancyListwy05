@@ -98,6 +98,11 @@
 
 
 
+  <!-- Leaflet + skrypt mapy -->
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/@mapbox/togeojson@0.16.0/dist/togeojson.js"></script>
+  <script defer src="../scripts/script.js"></script>
+
 <div id="overlay">
   <div id="modal">
     <h2 class="white">Ustawienia</h2>
@@ -106,12 +111,11 @@
       <li>Motyw strony</li>
       <hr>
     </ul>
-  <div id="gps-controls">
+    <div id="gps-controls">
   <button id="startTracking">▶ Start śledzenia</button>
   <button id="stopTracking" disabled>⏹ Stop</button>
   <button id="centerMap">📍 Pokaż moją pozycję</button>
 </div>
-
   </div>
 </div>
 
