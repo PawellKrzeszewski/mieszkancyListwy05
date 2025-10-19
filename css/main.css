@@ -298,7 +298,7 @@ main
   #lista {
     list-style: none; /* usuwa punkty listy */
     padding: 0;
-    width: 250px; /* szerokość listy */
+    width: 100%; /* szerokość listy */
     border: 1px solid #ccc; /* obramowanie całej listy */
     border-radius: 10px;
     overflow: hidden;
@@ -350,4 +350,115 @@ main
     font-size: 24px;
     text-align: center;
     transition: opacity 1s ease;
+  }
+
+  @media (max-width: 1400px) 
+  {
+    #left
+    {
+        display: none;
+        transition: .5s;
+    }  
+  }
+
+  @media (max-width: 992px) 
+  {
+    main > section
+    {
+        flex-direction: column;
+    }
+
+    #map
+    {
+        width: 100%;
+        box-shadow: none;
+        margin-bottom: 4rem;
+    }
+
+    #panel
+    {
+        width: 80%;
+    }
+
+    #colapse{display: none; transition: .5s;}
+  }
+
+  @media (max-width: 768px) 
+  {
+    header > div:first-child
+    {
+        flex-direction: column;
+    }
+
+
+  }
+  
+  @media (max-width: 576px) 
+  {
+
+    li
+    {
+        text-align: center;
+    }
+
+    a
+    {
+        padding: 0 !important;
+    }
+
+    .create-group 
+    {
+        padding: .5rem 1rem;
+    }
+
+    #dupa
+    {
+        flex-direction: column;
+    }
+
+    .group-info
+    {
+        flex-direction: column;
+    }
+
+    .group-details
+    {
+        padding: 0;
+    }
+
+    #modal
+    {
+        padding: .5rem 1rem;
+    }
+
+    header
+    {
+        flex-direction: column;
+    }
+
+    header > div:first-child
+    {
+        width: 100%;
+        margin-bottom: 2rem;
+        gap: 1rem;
+    }
+
+    header div
+    {
+        width: 100%;
+        text-align: center;
+    }
+
+    nav ul
+    {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav
+    {
+        width: 100%;
+    }
+
+    .slide-btn.right, .slide-btn.left{top: 14rem;} 
   }
