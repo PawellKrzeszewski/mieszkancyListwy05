@@ -226,3 +226,7 @@ main
 .toggle-left-open {
   left: 2rem;
 }
+#panel {
+  transition: width 0.4s ease;
+  overflow: hidden;
+}
