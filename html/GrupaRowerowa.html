@@ -44,7 +44,7 @@
     <div class="group-list szklo">
       <h2>Grupy rowerowe</h2>
 
-      <div id="groupContainer">
+      <div id="groupContainer" class="expand" data-expandable="true">
         <div class="group-card">
           <div class="group-header">
             <div class="group-info">
@@ -218,6 +218,7 @@
 
   <!-- SKRYPTY -->
   <script>
+  document.addEventListener('DOMContentLoaded', () => {
     const leftPanel = document.getElementById('leftPanel');
     const rightPanel = document.getElementById('rightPanel');
     const toggleLeft = document.getElementById('toggleLeft');
@@ -233,24 +234,36 @@
       toggleRight.style.transform = rightPanel.classList.contains('active') ? 'translateX(-28.5rem)' : 'translateX(0)';
     };
 
-    function setupExpandButtons() {
-      document.querySelectorAll('.expand').forEach(button => {
-        button.onclick = () => {
-          const card = button.closest('.group-card');
-          const isActive = card.classList.contains('active');
+    function toggleCard(card, expandBtn) {
+      const isActive = card.classList.contains('active');
+      document.querySelectorAll('.group-card').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.expand').forEach(b => b.classList.remove('rotated'));
 
-          document.querySelectorAll('.group-card').forEach(c => c.classList.remove('active'));
-          document.querySelectorAll('.expand').forEach(b => b.classList.remove('rotated'));
+      if (!isActive) {
+        card.classList.add('active');
+        expandBtn.classList.add('rotated');
+      }
+    }
 
-          if (!isActive) {
-            card.classList.add('active');
-            button.classList.add('rotated');
-          }
-        };
+    function setupExistingCards() {
+      document.querySelectorAll('.group-card').forEach(card => {
+        const expandBtn = card.querySelector('.expand');
+
+        if (expandBtn) {
+          expandBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleCard(card, expandBtn);
+          });
+        }
+
+        card.addEventListener('click', (e) => {
+          if (expandBtn && e.target === expandBtn) return;
+          toggleCard(card, expandBtn);
+        });
       });
     }
 
-    setupExpandButtons();
+    setupExistingCards(); // <- działa także dla domyślnej grupy
 
     document.getElementById('createBtn').addEventListener('click', () => {
       const name = document.getElementById('groupName').value.trim();
@@ -272,7 +285,7 @@
       newCard.innerHTML = `
         <div class="group-header">
           <div class="group-info">
-            <div class="group-avatar" style="background-image: url('${imageURL}');"></div>
+            <div class="group-avatar" style="background-image: url('${imageURL}'); background-size: cover;"></div>
             <div class="group-text">
               <strong>${name}</strong>
               Ilość uczestników: 1<br>
@@ -290,11 +303,25 @@
       const container = document.getElementById('groupContainer');
       container.prepend(newCard);
 
+      // Wyczyść formularz
       document.querySelectorAll('.form-box input, .form-box textarea').forEach(el => el.value = '');
 
-      setupExpandButtons();
+      // Obsługa kliknięć nowej grupy
+      const expandBtn = newCard.querySelector('.expand');
+      if (expandBtn) {
+        expandBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleCard(newCard, expandBtn);
+        });
+      }
+
+      newCard.addEventListener('click', (e) => {
+        if (expandBtn && e.target === expandBtn) return;
+        toggleCard(newCard, expandBtn);
+      });
     });
 
+    // Modal
     const button = document.getElementById('settings');
     const overlay = document.getElementById('overlay');
 
@@ -307,7 +334,9 @@
         overlay.style.display = 'none';
       }
     });
-  </script>
+  });
+</script>
+
 
 </body>
 </html>
