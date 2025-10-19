@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Grupy rowerowe</title>
   <script src="https://kit.fontawesome.com/8164e1f9c8.js" crossorigin="anonymous"></script>
+  <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
@@ -25,39 +26,11 @@
       </ul>
     </nav>
 
-            <label>Nazwa grupy:</label>
-            <input type="text" id="groupName" placeholder="Wpisz nazwę grupy">
-
-            <label>Data rozpoczęcia i zakończenia:</label>
-            <div id="dupa" style="display: flex; gap: 10px;">
-                <input type="date" id="startDate"> 
-                <input type="date" id="endDate">
-            </div>
-
-            <label>Lokalizacja podróży:</label>
-            <input type="text" id="location" placeholder="np. Tatry, Mazury, Gdańsk">
-
-            <label>Cel podróży:</label>
-            <textarea id="goal" placeholder="Długi opis celu i trasy..."></textarea>
-
-            <button class="create-btn" id="createBtn">Utwórz</button>
-        </div>
     <div id="settings">
       <i class="fa-solid fa-gear"></i>
     </div>
   </header>
 
-</div>
-
-<div id="overlay">
-  <div id="modal">
-    <h2 class="white">Ustawienia</h2>
-    <ul id="lista">
-      <li>Profil</li>
-      <li>Motyw strony</li>
-      <hr>
-      <li>Dane</li>
-    </ul>
   <!-- CONNECTOR BUTTONS -->
   <div id="connnector">
     <button id="toggleLeft" class="slide-btn left">Alerty ☰</button>

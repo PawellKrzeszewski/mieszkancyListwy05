@@ -1,4 +1,3 @@
-header
 {
     display: flex;
     justify-content: space-between;
@@ -28,7 +27,7 @@ nav
     & ul
     {
     display: flex;
-    
+
     & li
     {
         width: 5rem;
@@ -36,7 +35,7 @@ nav
 
     & li:first-child, li:nth-child(2)
     {
-        /* margin-right: 2rem; */
+        margin-right: 2rem;
     }
     }
 }

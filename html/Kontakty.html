@@ -4,6 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../css/main.css">
   <script src="https://kit.fontawesome.com/8164e1f9c8.js" crossorigin="anonymous"></script>
+  <link rel="manifest" href="manifest.json">
   <title>Zgłoszenie rowerowe Płock</title>
 </head>
 <body>
@@ -40,7 +41,7 @@
       <button type="submit" id="submitButton1">Wyślij zgłoszenie</button>
     </form>
   </div>
-
+  <div id="overlay1">Zgłoszenie wysłano</div>
   <div id="overlay">
   <div id="modal">
     <h2 class="white">Ustawienia</h2>
@@ -48,7 +49,7 @@
       <li>Profil</li>
       <li>Motyw strony</li>
       <hr>
-      <li>Dane</li>
+      <li>Lokalizacja GPX</li>
     </ul>
   </div>
 </div>
@@ -190,21 +191,9 @@ toggleRight.onclick = () => {
   rightPanel.classList.toggle('active');
   toggleRight.style.transform = rightPanel.classList.contains('active') ? 'translateX(-28.5rem)' : 'translateX(0)';
 };
-    document.getElementById("reportForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const message = document.getElementById("message").value.trim();
-      if (message) {
-        const subject = encodeURIComponent("Zgłoszenie rowerowe");
-        const body = encodeURIComponent(message);
-        window.location.href = `mailto:rowerowy@plock.eu?subject=${subject}&body=${body}`;
-      } else {
-        alert("Proszę wpisać treść zgłoszenia!");
-      }
-    });
 
-<div id="overlay1">Zgłoszenie wysłano</div>
 
-  const form = document.getElementById('reportForm');
+const form = document.getElementById('reportForm');
   const overlay1 = document.getElementById('overlay1');
 
   form.addEventListener('submit', (e) => {
@@ -225,9 +214,7 @@ toggleRight.onclick = () => {
     form.reset(); // czyści formularz po wysłaniu
   });
     
-  
-
-const button = document.getElementById('settings');
+    const button = document.getElementById('settings');
   const overlay = document.getElementById('overlay');
 
   button.addEventListener('click', () => {
