@@ -169,8 +169,7 @@ legend.onAdd = function () {
       <div><img src="../imgs/bench.png" style="width:20px;height:20px;vertical-align:middle;margin-right:6px;"> Ławka / odpoczynek</div>
     </div
   `;
-  return div;
-};
+
 legend.addTo(map);
 
 // === DOKŁADNE ŚLEDZENIE GPS ===
@@ -285,4 +284,5 @@ console.log("✅ Skrypt mapy wczytany poprawnie");
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('../scripts/sw.js');
+}
 }
